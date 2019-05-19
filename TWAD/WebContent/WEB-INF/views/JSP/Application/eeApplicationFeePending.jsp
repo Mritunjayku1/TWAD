@@ -463,7 +463,7 @@ $(function(){
 <tr><td><span><b>GST Amount:</b></span></td><td>
 			<input placeholder="Ex: 12" type="text" id="gstAmountId" name="gstAmount" readonly="readonly" value="0" style="background-color: lightgrey;"/></td></tr>
  --%>
-<tr><td><span><b>Total Amount:</b></span></td><td>
+<tr><td><span><b>Upfront Charges:</b></span></td><td>
 			<input placeholder="Ex: 123" type="text" id="totalAmountId" name="totalAmount"/></td></tr>
 
 

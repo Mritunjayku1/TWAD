@@ -76,7 +76,7 @@ public class SmsDataDaoImp implements SmsDatadao {
 		SmsTemplate = cr.list();
 		return SmsTemplate;
 	}
-	@Override
+	/*@Override
 	public List<EmployeeDetails> getTemplateIDtoEE(String applicationId, Integer smsType) {
 		Session session = sessionfact.openSession();
 		int  officeId=2;
@@ -89,11 +89,40 @@ public class SmsDataDaoImp implements SmsDatadao {
 		companyCriteria.add(Restrictions.eq("eo1.divisionId",officeId));
 		//companyCriteria.add(Restrictions.eq("appId", applicationId));
 		
+		ProjectionList properties = Projections.projectionList();
+		properties.add(Projections.property("emailAddr"));
+		properties.add(Projections.property("phoneNum"));
+		companyCriteria.setProjection(properties);
+		SmsTemplate=companyCriteria.list();
+		
+		
+		Criteria cr = session.createCriteria(EmployeeDetails.class);
+		cr.add(Restrictions.eq("appId", applicationId));
+		SmsTemplate = cr.list();
+		return SmsTemplate;
+	}*/
+	@Override
+	public List<EmployeeDetails> getTemplateIDtoEE(String applicationId, Integer smsType) {
+		Session session = sessionfact.openSession();
+		int  officeId=2;
+		List<EmployeeDetails> SmsTemplate = new ArrayList<EmployeeDetails>();
+		Criteria companyCr = session.createCriteria(CompanyDtl.class,"e2")
+				.add(Restrictions.eq("e2.appId", applicationId));
+		List<CompanyDtl> companyDtlList =   companyCr.list();
+		
+		
+		Criteria companyCriteria = session.createCriteria(EmployeeDetails.class,"e1")
+		.createCriteria("e1.userDivision","eo1")
+		//.createCriteria(CompanyDtl.class,"c1")
+		//.createCriteria("c1.office","co1");
+		.add(Restrictions.eq("eo1.divisionId",companyDtlList.get(0).getDivision().getDivisionId()));
+		//companyCriteria.add(Restrictions.eq("appId", applicationId));
+		
 		/*ProjectionList properties = Projections.projectionList();
 		properties.add(Projections.property("emailAddr"));
 		properties.add(Projections.property("phoneNum"));
 		companyCriteria.setProjection(properties);*/
-		SmsTemplate=companyCriteria.list();
+		SmsTemplate=(List<EmployeeDetails>)companyCriteria.list();
 		
 		
 		/*Criteria cr = session.createCriteria(EmployeeDetails.class);

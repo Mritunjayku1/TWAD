@@ -903,19 +903,7 @@ window.onbeforeunload = function () {
 </tr>
 <tr class="tab2">
                         <td>
-                        
-                        
-                                <div>
-                                   <label><b>REQs of water<font style="color: rgb(128, 128, 128); font-size: 10px;"> (in KLD):</font></b></label> <span style="color: red;">*</span>
-                                       <input placeholder="Ex: 12345" type="text" id="reqMldId" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeypress="gst()" name="reqMld" style="margin-right: 5px;margin-left: 30px; width: 130px;" maxlength="5" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Requirement of water" />
-                                        <a href="library/MLD.pdf" download><img src="library/img/pdf-image.jpg" width="35px" height="40px" style="position: relative; cursor: pointer;"></a>
-                                </div>
-                              <br/>
-                        </td>
-                    </tr>
-                      <tr class="tab2">
-                        <td>
-                            <div>
+                        <div>
                                 <label><b>Type of water:</b></label> <span style="color: red;">*</span>
                                 <select class="classCategory" id="workTypeId" name="workType" style="margin-left: 76px;">
                                     <option value="">--Select--</option>
@@ -924,6 +912,31 @@ window.onbeforeunload = function () {
                                     <option value="2">Secondary treated water</option>
                                 </select><img src="library/img/pdf-image.jpg" width="35px" height="40px" style="position: absolute; cursor: pointer;">
                             </div>
+                        
+                                <%-- <div>
+                                   <label><b>REQs of water<font style="color: rgb(128, 128, 128); font-size: 10px;"> (in KLD):</font></b></label> <span style="color: red;">*</span>
+                                       <input placeholder="Ex: 12345" type="text" id="reqMldId" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeypress="gst()" name="reqMld" style="margin-right: 5px;margin-left: 30px; width: 130px;" maxlength="5" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Requirement of water" />
+                                        <a href="library/MLD.pdf" download><img src="library/img/pdf-image.jpg" width="35px" height="40px" style="position: relative; cursor: pointer;"></a>
+                                </div> --%>
+                              <br/>
+                        </td>
+                    </tr>
+                      <tr class="tab2">
+                        <td>
+                        <div>
+                                   <label><b>REQs of water<font style="color: rgb(128, 128, 128); font-size: 10px;"> (in KLD):</font></b></label> <span style="color: red;">*</span>
+                                       <input placeholder="Ex: 12345" type="text" id="reqMldId" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeypress="gst()" name="reqMld" style="margin-right: 5px;margin-left: 30px; width: 130px;" maxlength="5" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Requirement of water" />
+                                        <a href="library/MLD.pdf" download><img src="library/img/pdf-image.jpg" width="35px" height="40px" style="position: relative; cursor: pointer;"></a>
+                                </div>
+                            <!-- <div>
+                                <label><b>Type of water:</b></label> <span style="color: red;">*</span>
+                                <select class="classCategory" id="workTypeId" name="workType" style="margin-left: 76px;">
+                                    <option value="">--Select--</option>
+                                    <option value="1">Treated (Chloronated)</option>
+                                    <option value="1">Raw Water</option>
+                                    <option value="2">Secondary treated water</option>
+                                </select><img src="library/img/pdf-image.jpg" width="35px" height="40px" style="position: absolute; cursor: pointer;">
+                            </div> -->
                             <br />
                         </td>
                     </tr>
@@ -1029,6 +1042,10 @@ window.onbeforeunload = function () {
             <td>
              <br/>
             <a> Terms and Conditions</a><br/>
+           <li>The payment early will be given priority for consideration.</li>
+           <li>TWAD reserves the right to cancel</li>
+           <li>Preference & Consumenrs will be at the sole discreation of TWAD BD.HO</li>
+          
             <input type="checkbox" id="checkAgreeId" name="checkAgree"/> <b>I Agree</b>
             
             </td>

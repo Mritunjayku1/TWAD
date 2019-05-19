@@ -114,6 +114,7 @@ public class SMSBuilder {
 			HashMap<String, String> smsdtls = new HashMap<String, String>();
 			smsdtls.put("ToMobileNo", emp.getPhoneNum().toString());
 			smsdtls.put("EmailId", emp.getEmailAddr().toString());
+			smsdtls.put("Body", smsTemp);
 			
 			Message = getMsgBody(smsdtls.get("Body"), smsdtls);
 			mobnumber = getMsgBody(smsdtls.get("ToMobileNo"), smsdtls);
@@ -268,7 +269,7 @@ public class SMSBuilder {
 					URL url = new URL(SMSUrl);
 
 					//if ("1".equals(isSMSEmailActive)) {
-						System.out.println("SMS URL :" + SMSUrl);
+						System.out.println("SMS app URL :" + SMSUrl);
 						HttpURLConnection connection = (HttpURLConnection) url
 								.openConnection();
 						connection.connect();

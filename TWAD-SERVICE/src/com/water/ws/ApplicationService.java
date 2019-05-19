@@ -216,7 +216,7 @@ public class ApplicationService {
 		applicationDtls.setDistrict( (MasterDistrict) session.get(MasterDistrict.class, Integer.parseInt(appFormBean.getDistrict())));
 		applicationDtls.setTaluk( (MasterTaluk) session.get(MasterTaluk.class, Integer.parseInt(appFormBean.getTaluk())));
 		applicationDtls.setVillage( (MasterVillage) session.get(MasterVillage.class, Integer.parseInt(appFormBean.getVillage())));
-		applicationDtls.setScheme( (MasterScheme) session.get(MasterScheme.class, Integer.parseInt(appFormBean.getScheme())));
+		applicationDtls.setScheme( (MasterScheme) session.get(MasterScheme.class, Integer.parseInt(appFormBean.getScheme()!=null?appFormBean.getScheme():"0")));
 
 		applicationDtls.setLocalBody(appFormBean.getLocalBody());
 		applicationDtls.setAvailability(appFormBean.getAvailability());
@@ -266,7 +266,7 @@ public class ApplicationService {
 		
 
 		final Integer smsType = 1;
-		final String smsTemp="Thank%20you%20for%20Registering%20Water%20Connection%20Your%20TWAD%20App%20No%20"+appFormBean.getAppId();
+		final String smsTemp="Thank%20you%20for%20Registering%20Water%20Connection%20Your%20TWAD%20App%20No%20"+applicationDtls.getAppId();
 		
 		final String application_ID = applicationDtls.getAppId();
 		Thread notify = new Thread(new Runnable() {
