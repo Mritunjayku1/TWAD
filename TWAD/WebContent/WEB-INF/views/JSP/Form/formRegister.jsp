@@ -633,18 +633,23 @@ window.onbeforeunload = function () {
 		var isNewConnection = $("#isNewConnectionId");
 		var cpinCode = $("#cpinCodeId");
 		var localBody = $("#localBodyId");
+		var availability = $("#availabilityId")
 		
 		
 		var inputVal = new Array(legCompName,surveyFieldNoId, cpinCode, contactPersonName,mobileNum, emailAddr, pinCode,localBody);
 		if(isSubmitBtnClicked){
-		   inputVal = new Array(categoryType, isNewConnection,reqMld, workType);
+		   inputVal = new Array(categoryType, isNewConnection,reqMld, workType,availability);
 		}
 		$('.error').hide();
 		flag = true;
 		for (i = 0; i < inputVal.length; i++) {
 			if (inputVal[i].val() == "") {
-				inputVal[i].parent('div').find('label').after(
-						'<span class="error"> This field is required. </span>');
+				if(inputVal.length != 5)
+				inputVal[i].parent('div').find('label').after('<span class="error"> This field is required. </span>');
+				else{
+					inputVal[i].parent('div').find('input').after('<span class="error"> This field is required. </span>');
+					inputVal[i].parent('div').find('select').after('<span class="error"> This field is required. </span>');
+				}
 				inputVal[i].focus();
 				flag = false;
 			} else if (inputVal[i].attr('id') == 'emailAddrId'
@@ -664,7 +669,7 @@ window.onbeforeunload = function () {
 					&& !/^[1-9][0-9]+$/.test(inputVal[i].val())) {
 				inputVal[i]
 						.parent('div')
-						.find('label')
+						.find('input')
 						.after(
 								'<span class="error"> Please enter required KLD in Number   </span>');
 				inputVal[i].focus();
@@ -691,33 +696,37 @@ window.onbeforeunload = function () {
 			}
 			
 			
+			
+			 if (inputVal[i].attr('id') == 'workTypeId' && $('#workTypeId').val() == 1) {
+					if ($('#availabilityId').val() == "") {
+						$('#availabilityId')
+						.parent('div')
+						.find('select')
+								.after(
+										'<span class="error"> Please select Availability </span>');
+						$('#availabilityId').focus();
+						flag = false;
+					}
+			 }
+			 
+			 if (inputVal[i].attr('id') == 'availabilityId' && $('#availabilityId').val() == 1) {
+					if ($('#schemeId').val() == "") {
+						$('#schemeId')
+						.parent('div')
+						.find('select')
+								.after(
+										'<span class="error"> Please select Scheme </span>');
+						$('#schemeId').focus();
+						flag = false;
+					}
+			 }
+			
+			
 
 		}
 
-		 if ($('#workTypeId').val() == 1) {
-				if ($('#availabilityId').val() == "") {
-					$('#availabilityId')
-					.parent('div')
-					.find('label')
-							.after(
-									'<span class="error"> Please select Availability </span>');
-					$('#availabilityId').focus();
-					flag = false;
-				}
-		 }
-		 
-		 if ($('#availabilityId').val() == 1) {
-				if ($('#schemeId').val() == "") {
-					$('#schemeId')
-					.parent('div')
-					.find('label')
-							.after(
-									'<span class="error"> Please select Scheme </span>');
-					$('#schemeId').focus();
-					flag = false;
-				}
-		 }
-		 
+		
+		  
 		if(pinCode.val()!="" && (districtId.val()=="" || talukId.val()=="" || villageId.val()=="" )){
 			districtId.parent('div').find('label').after(
 					'<span class="error"> Please select District,Taluk,Village </span>');
@@ -837,7 +846,7 @@ window.onbeforeunload = function () {
                             <div>
                                 <label><b>Mobile Number:</b></label> <span style="color: red;">*</span>
                                 <br />
-                                <input value="+91" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57 && event.charCode = 43' id="mobileNumId" name="mobileNum" maxlength="13" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Mobile No." />
+                                <input  type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57 && event.charCode = 43' id="mobileNumId" name="mobileNum" maxlength="13" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Mobile No." />
                             </div>
                             <br />
                         </td>
@@ -1054,7 +1063,7 @@ window.onbeforeunload = function () {
                        <tr class="tab2">
                         <td>
                             <div>
-                                <label><b>Availability of water:</b></label> <span style="color: red;">*</span>
+                                <label><b>Availability of water:</b></label>
                                 <select class="classCategory" id="availabilityId" name="availability" style="margin-left: 35px;">
                                     <option value="">--Select--</option>
                                     <option value="1">From TWAD CWSS</option>
@@ -1067,7 +1076,7 @@ window.onbeforeunload = function () {
                         <tr class="tab2">
                         <td>
                             <div>
-                                <label><b>Scheme:</b></label> <span style="color: red;">*</span>
+                                <label><b>Scheme:</b></label> 
                                 <select class="classCategory" id="schemeId" name="scheme" style="margin-left: 112px;" title="Scheme with Quantity">
                                     <option value="">--Select--</option>
                                    
