@@ -1556,6 +1556,38 @@ public class DashboardController {
 		return new ModelAndView("approvedApplication", "list", model);
 	}
 	
+	@RequestMapping(value = "/transferApplication", method = RequestMethod.GET)
+	public ModelAndView transferApplication()
+			throws JSONException {
+
+		Map<String, Object> model = new HashMap<String, Object>();
+
+		RestTemplate restTemplate = new RestTemplate();
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+
+		HttpEntity<?> entity = new HttpEntity(headers);
+
+		ResponseEntity<String> out = restTemplate.exchange(
+				WaterDashboardService + "transferApplication",
+				HttpMethod.POST, entity, String.class);
+
+		JSONArray jsonArray = new JSONArray(out.getBody().toString());
+
+		gson = new Gson();
+
+		List<DDPaymentFormBean> applicationBeanList = new ArrayList<>();
+
+		for (int i = 0; i < jsonArray.length(); i++) {
+			DDPaymentFormBean applicationBean = gson.fromJson(
+					jsonArray.getString(i), DDPaymentFormBean.class);
+			applicationBeanList.add(applicationBean);
+		}
+
+		model.put("appBean", applicationBeanList);
+		return new ModelAndView("transferApplication", "list", model);
+	}
 
 	
 
@@ -1654,6 +1686,28 @@ public class DashboardController {
 	
 	
 
+	@RequestMapping(value = "/transferApplicationSave", method = RequestMethod.POST)
+	@ResponseBody
+	public String transferApplicationSave(DDPaymentFormBean dDPaymentFormBean)
+			throws JSONException {
+
+
+		RestTemplate restTemplate = new RestTemplate();
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+
+		HttpEntity<?> entity = new HttpEntity(dDPaymentFormBean,headers);
+
+		ResponseEntity<String> out = restTemplate.exchange(
+				WaterDashboardService + "transferApplicationSave",
+
+				HttpMethod.POST, entity, String.class);
+
+		return out.getBody().toString();
+
+	}
+	
 	@RequestMapping(value = "/registeredApplicationRejected", method = RequestMethod.POST)
 	@ResponseBody
 	public String registeredApplicationRejected(DDPaymentFormBean dDPaymentFormBean)

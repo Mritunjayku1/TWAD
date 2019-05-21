@@ -23,6 +23,7 @@ public interface DashboardDao {
 	public String eeAddFullPayment(PaymentFormBean paymentFormBean );
 	public List<DDPaymentFormBean> registeredApplication();
 	public List<DDPaymentFormBean> approvedApplication();
+	public List<DDPaymentFormBean> transferApplication();
 	public List<DDPaymentFormBean> rejectedApplication();
 	public List<DDPaymentFormBean> paymentPendingList();
 	public List<DDPaymentFormBean> paymentRejectedList();

@@ -450,6 +450,7 @@ public class ApplicationController {
 		String[] appTranc = responseSplit[1].split("TR");
 		String[] paymentTypeApplicationId= appTranc[0].split("-");
 		String paymentType= paymentTypeApplicationId[0];
+		model.addAttribute("paymentType", paymentType);
 		String appId= paymentTypeApplicationId[1];
 		//String appId=applicationIdRef;
 		model.addAttribute("applicationRef", appId);

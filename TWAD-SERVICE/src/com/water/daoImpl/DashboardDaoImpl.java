@@ -1242,7 +1242,7 @@ public class DashboardDaoImpl implements DashboardDao {
 			applicationmodel.setFixedFinalFee(Integer.parseInt(applicationBean.getEstimationCost()));
 			res="App%20No%20"+applicationBean.getAppId()+"%20Water%20Connection%20Approved%20Successfully.";
 			result= "MC%20APPROVED";
-		 resMsg="Management%20Committee%20has%20approved%20the%20estimate%20cost.%20Please%20pay%20the%20estimated%20fee";
+		 resMsg="Management%20Committee%20has%20transfer%20the%20estimate%20cost.%20Please%20pay%20the%20estimated%20fee";
 		}
 		if(applicationBean.getIsMcDicision().equals("2")){
 			
@@ -1546,7 +1546,78 @@ public class DashboardDaoImpl implements DashboardDao {
 		return appDetails;
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DDPaymentFormBean> transferApplication() {
+		// TODO Auto-generated method stub
 
+		
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+		List<DDPaymentFormBean> appDetails = new ArrayList<DDPaymentFormBean>();
+		try {
+			
+
+			Criteria cr = session.createCriteria(CompanyDtl.class,"companyDtl")
+					.createAlias("companyDtl.categoryType", "categoryType")
+					.createAlias("companyDtl.district", "district")
+					.createAlias("companyDtl.taluk", "taluk")
+					.createAlias("companyDtl.village", "village")
+					.createAlias("companyDtl.division","division",JoinType.LEFT.ordinal())
+					.setProjection(Projections.projectionList()
+					.add(Projections.property("companyDtl.appId"),"appId")
+					.add(Projections.property("companyDtl.contactPersonName"),"contactPersonName")
+					.add(Projections.property("companyDtl.legCompName"),"legCompName")
+					.add(Projections.property("companyDtl.createTs"),"createTs")
+					.add(Projections.property("companyDtl.cdoorNo"),"cdoorNo")
+					.add(Projections.property("companyDtl.cplotNo"),"cplotNo")
+					.add(Projections.property("companyDtl.cstreetName"),"cstreetName")
+					.add(Projections.property("companyDtl.clocation"),"clocation")
+					.add(Projections.property("companyDtl.cpinCode"),"cpinCode")
+					.add(Projections.property("companyDtl.salutation"),"salutation")
+					.add(Projections.property("companyDtl.mobileNum"),"mobileNum")
+					.add(Projections.property("companyDtl.landLineNo"),"landLineNo")
+					.add(Projections.property("companyDtl.emailAddr"),"emailAddr")
+					.add(Projections.property("categoryType.categoryName"),"categoryType")
+					.add(Projections.property("division.divisionName"),"divisionName")
+					.add(Projections.property("companyDtl.addrPremSought"),"addrPremSought")
+					.add(Projections.property("companyDtl.doorNo"),"doorNo")
+					.add(Projections.property("companyDtl.plotNo"),"plotNo")
+					.add(Projections.property("companyDtl.streetName"),"streetName")
+					.add(Projections.property("companyDtl.location"),"location")
+					.add(Projections.property("district.districtName"),"district")
+					.add(Projections.property("taluk.talukName"),"taluk")
+					.add(Projections.property("village.villageName"),"village")
+					.add(Projections.property("companyDtl.pinCode"),"pinCode")
+					.add(Projections.property("companyDtl.surveyFieldNo"),"surveyFieldNo")
+					.add(Projections.property("companyDtl.isNewConnection"),"isNewConnection")
+					.add(Projections.property("companyDtl.reqMld"),"reqMld")
+					.add(Projections.property("companyDtl.gstAmount"),"gstAmount")
+					.add(Projections.property("companyDtl.totalAmount"),"totalAmount")
+					.add(Projections.property("companyDtl.intrPlumStatus"),"intrPlumStatus")
+					.add(Projections.property("companyDtl.workType"),"workType")
+					.add(Projections.property("companyDtl.managementComments"),"managementComments")
+				           
+				           )
+					.add(Restrictions.isNotNull("companyDtl.division"));
+					cr.setResultTransformer(Transformers.aliasToBean(DDPaymentFormBean.class));
+					
+			
+			appDetails=cr.list();
+			
+			
+			
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return appDetails;
+	}
+	
+
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<DDPaymentFormBean> rejectedApplication() {
@@ -2223,7 +2294,7 @@ public String eeAddFullPayment(PaymentFormBean paymentFormBean ){
 	Transaction tx1 =  session.beginTransaction();
 	CompanyDtl companyDtl = (CompanyDtl)session.get(CompanyDtl.class,paymentFormBean.getAppId());
 	companyDtl.setEeStatus( (MasterStatus)session.get(MasterStatus.class,3));
-	companyDtl.setActive(3);
+	companyDtl.setActive(2);
 	//companyDtl.setInspectionDate(paymentFormBean.getInspectedDate());
 	companyDtl.setPaymentStatus(0);
 	companyDtl.setEeUpfrontReceiptDate(paymentFormBean.getReceiptDate());
@@ -2382,7 +2453,7 @@ public String mcApprovePayment(PaymentFormBean paymentFormBean ){
 	
 	Transaction tx1 =  session.beginTransaction();
 	CompanyDtl companyDtl = (CompanyDtl)session.get(CompanyDtl.class,paymentFormBean.getAppId());
-	companyDtl.setEeStatus((MasterStatus) session.get(MasterStatus.class, 3));
+	//companyDtl.setEeStatus((MasterStatus) session.get(MasterStatus.class, 3));
 	companyDtl.setMcUser(paymentFormBean.getMcUser());
 	
 	if(paymentFormBean.getMcUser().equals("RTC")){
@@ -2411,12 +2482,12 @@ public String mcApprovePayment(PaymentFormBean paymentFormBean ){
 		}
 	
 	
-	if(null != companyDtl.getMcUser() && !companyDtl.getMcUser().equals("") && null != companyDtl.getMcSLTCUser() && !companyDtl.getMcSLTCUser().equals("") && null != companyDtl.getMcBoardUser() && !companyDtl.getMcBoardUser().equals(""))
-		companyDtl.setActive(2);
+	/*if(null != companyDtl.getMcUser() && !companyDtl.getMcUser().equals("") && null != companyDtl.getMcSLTCUser() && !companyDtl.getMcSLTCUser().equals("") && null != companyDtl.getMcBoardUser() && !companyDtl.getMcBoardUser().equals(""))
+		companyDtl.setActive(2);*/
 	
 	session.update(companyDtl);
 	tx1.commit();
-		return "Payment Details Approved";
+		return "Process status saved";
 	}
 
 

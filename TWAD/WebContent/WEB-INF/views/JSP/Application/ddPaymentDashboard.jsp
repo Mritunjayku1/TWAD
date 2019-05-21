@@ -88,7 +88,7 @@ table.display .td {
 		"Compliants" : "Pending",
 		"Count" : pendingCount
 	}, {
-		"Compliants" : "Approved",
+		"Compliants" : "Reassign/Transfer",
 		"Count" : approvedCount
 	},
 	{

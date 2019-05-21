@@ -340,11 +340,10 @@ window.onbeforeunload = function () {
 
 		$('#checkAgreeId').change(function(){
 			 if($(this).prop("checked") == true){
-			$('#registrationbtnId').removeAttr('disabled');
-		
-		$('#registrationbtnId').css({
-			'background-color' : '#2DAAE1'
-		});
+			   $('#registrationbtnId').removeAttr('disabled');
+		       $('#registrationbtnId').css({
+			      'background-color' : '#2DAAE1'
+		       });
 			 }
 			 else{
 					$('#registrationbtnId').attr('disabled', 'true');
@@ -355,6 +354,25 @@ window.onbeforeunload = function () {
 		});
 		
 		
+		$('#sameAsSiteAddressId').change(function(){
+			 if($(this).prop("checked") == true){
+			   $('#cdoorNoId').val($('#doorNoId').val());
+			   $('#cplotNoId').val($('#plotNoId').val());
+			   $('#cstreetNameId').val($('#streetNameId').val());
+			   $('#clocationId').val($('#locationId').val());
+			   $('#cpinCodeId').val($('#pinCodeId').val());
+			 }
+			 /* else{
+				 $('#cdoorNoId').val("");
+				   $('#cplotNoId').val("");
+				   $('#cstreetNameId').val("");
+				   $('#clocationId').val("");
+				   $('#cpinCodeId').val("");
+			 } */
+		});
+		
+		
+				
 
 		$('input[type="text"]').each(function() {
 			$(this).attr('data-content', $(this).attr('placeholder'));
@@ -452,6 +470,19 @@ window.onbeforeunload = function () {
 			$('#additionalInfoId').css({
 				'background' : '#FF7F27'
 			});
+			
+			if($('#checkAgreeId').prop("checked") == true){
+				   $('#registrationbtnId').removeAttr('disabled');
+			       $('#registrationbtnId').css({
+				      'background-color' : '#2DAAE1'
+			       });
+				 }
+				 else{
+						$('#registrationbtnId').attr('disabled', 'true');
+						$('#registrationbtnId').css({
+							'background-color' : 'lightgrey'
+						});
+				 }
 		});
 		
 		var tabCount = 0;
@@ -481,6 +512,18 @@ window.onbeforeunload = function () {
 			if(tabCount==0){
 				
 				isSubmitBtnClicked=false;
+				
+				 if($('#sameAsSiteAddressId').prop("checked") == true){
+					   $('#cdoorNoId').val($('#doorNoId').val());
+					   $('#cplotNoId').val($('#plotNoId').val());
+					   $('#cstreetNameId').val($('#streetNameId').val());
+					   $('#clocationId').val($('#locationId').val());
+					   $('#cpinCodeId').val($('#pinCodeId').val());
+					 }
+					
+				
+
+				
 				if(validateForm()){
 					tabCount++;
 				 $('#siteId').click();
@@ -589,8 +632,10 @@ window.onbeforeunload = function () {
 		var pinCode = $("#pinCodeId");
 		var isNewConnection = $("#isNewConnectionId");
 		var cpinCode = $("#cpinCodeId");
+		var localBody = $("#localBodyId");
 		
-		var inputVal = new Array(legCompName,surveyFieldNoId, cpinCode, contactPersonName,mobileNum, emailAddr, pinCode);
+		
+		var inputVal = new Array(legCompName,surveyFieldNoId, cpinCode, contactPersonName,mobileNum, emailAddr, pinCode,localBody);
 		if(isSubmitBtnClicked){
 		   inputVal = new Array(categoryType, isNewConnection,reqMld, workType);
 		}
@@ -644,9 +689,35 @@ window.onbeforeunload = function () {
 				inputVal[i].focus();
 				flag = false;
 			}
+			
+			
 
 		}
 
+		 if ($('#workTypeId').val() == 1) {
+				if ($('#availabilityId').val() == "") {
+					$('#availabilityId')
+					.parent('div')
+					.find('label')
+							.after(
+									'<span class="error"> Please select Availability </span>');
+					$('#availabilityId').focus();
+					flag = false;
+				}
+		 }
+		 
+		 if ($('#availabilityId').val() == 1) {
+				if ($('#schemeId').val() == "") {
+					$('#schemeId')
+					.parent('div')
+					.find('label')
+							.after(
+									'<span class="error"> Please select Scheme </span>');
+					$('#schemeId').focus();
+					flag = false;
+				}
+		 }
+		 
 		if(pinCode.val()!="" && (districtId.val()=="" || talukId.val()=="" || villageId.val()=="" )){
 			districtId.parent('div').find('label').after(
 					'<span class="error"> Please select District,Taluk,Village </span>');
@@ -762,7 +833,14 @@ window.onbeforeunload = function () {
 
                     </tr>
                     <tr  class="tab1">
-                    
+                     <td>
+                            <div>
+                                <label><b>Mobile Number:</b></label> <span style="color: red;">*</span>
+                                <br />
+                                <input value="+91" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57 && event.charCode = 43' id="mobileNumId" name="mobileNum" maxlength="13" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Mobile No." />
+                            </div>
+                            <br />
+                        </td>
                      <td width="50%">
                             <div>
                                 <label><b>Survey Field No:</b></label> <span style="color: red;">*</span>
@@ -772,32 +850,20 @@ window.onbeforeunload = function () {
                             <br />
                         </td>
                         
-                          <td width="50%">
-                            <div>
-                                <label><b>Local Body:</b></label> <span style="color: red;">*</span>
-                                <br />
-                                <input placeholder="Local Body" type="text" id="localBodyId" name="localBody" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Local body" />
-                            </div>
-                            <br />
-                        </td>
+                        
+                        
+                       
                     
                     </tr>
                     <tr class="tab1">
-                        <td>
-                            <div>
-                                <label><b>Mobile Number:</b></label> <span style="color: red;">*</span>
-                                <br />
-                                <input placeholder="Ex: +911234567891" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57 && event.charCode = 43' id="mobileNumId" name="mobileNum" maxlength="13" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Mobile No." />
-                            </div>
-                            <br />
-                        </td>
+                       
 
-                        <td>
+ <td>
                         
                          <div>
                                 <div style="display: inline-block;float: left;">
                                    <label><b>STD Code</b></label><br/>
-                                       <input placeholder="Ex: 12345" type="text" id="stdCodeId" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="stdCode" style="margin-right: 5px; width: 100px;" maxlength="5" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter STD Code" />
+                                       <input placeholder="Ex: 12345" type="text" id="stdCodeId" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="stdCode" style="margin-right: 5px; width: 100px;" maxlength="5" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter STD Code" />
            
                                 </div>
                                 <div style="margin-left: 22px; display: inline-block;">
@@ -805,13 +871,54 @@ window.onbeforeunload = function () {
                                     <br />
                                     <div class="input-group">
                                         
-                                         <input placeholder="Ex: 1234567891" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="landLineNoId" name="landLineNo" style="margin-right: 5px; width: 200px;" maxlength="15" />
+                                         <input placeholder="Ex: 1234567891" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="landLineNoId" name="landLineNo"  maxlength="15" style="margin-right: 5px;width: 200px;"  />
                                     </div>
                                 </div>
                             </div>
                         
                             <br />
                         </td>
+ <td valign="top" rowspan="3">
+                            <div>
+                                <label><b>Site Address:</b></label> <span style="color: red;">*</span>
+                                <br />
+                                <input placeholder="Ex: DoorNo" type="text" id="doorNoId" name="doorNo" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Door No" />
+                                <br />
+                                <input placeholder="Ex: Plot No" type="text" id="plotNoId" name="plotNo" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Plot No" />
+                                <br />
+                                <input placeholder="Ex: Street Name" type="text" id="streetNameId" name="streetName" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Street Name" />
+                                <br />
+                                <input placeholder="Ex: Location" type="text" id="locationId" name="location" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Landmark" />
+                                <br />
+                                <input placeholder="Ex: PinCode" type="text" id="pinCodeId" onkeypress='return event.charCode >= 48 && event.charCode <= 57' name="pinCode" maxlength="6" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Pincode" />
+                                <br />
+                                <select class="classCategory" title="Select District" id="districtId" name="district" style="margin-right: 10px;">
+                                    <option value="">--Select District--</option>
+                                    <c:forEach items="${list.districtDtl}" var="app" varStatus="count">
+                                        <option value="${app.getDistrictId()}">${app.getDistrictName()}</option>
+                                    </c:forEach>
+                                </select>
+                                <select class="classCategory" title="Select Taluk" id="talukId" name="taluk" style="margin-right: 10px;">
+                                    <option value="">--Select Taluk--</option>
+                                </select>
+                                <select class="classCategory" title="Select Village" id="villageId" name="village" style="margin-right: 10px;">
+                                    <option value="">--Select Village--</option>
+                                </select>
+
+                            </div>
+                             <br />
+                            <div>
+                                <label><b>Local Body:</b></label> <span style="color: red;">*</span>
+                                <br />
+                                <input placeholder="Local Body" type="text" id="localBodyId" name="localBody" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Local body" />
+                            </div>
+                            <br/>
+                        </td>
+
+                        
+                       
+                       
+                       
                     </tr>
                     <tr class="tab1">
                         <td valign="top">
@@ -824,6 +931,9 @@ window.onbeforeunload = function () {
                             <div>
                                 <label><b>Address for Correspondence:</b></label> <span style="color: red;">*</span>
                                 <br />
+                                <input type="checkbox" id="sameAsSiteAddressId"/> <b>Is Correspondence Address same as Site Address?</b>
+                                <br/>
+                                 <br/>
                                 <input placeholder="Ex: DoorNo" type="text" id="cdoorNoId" name="cdoorNo" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Door No" />
                                 <br />
                                 <input placeholder="Ex: Plot No" type="text" id="cplotNoId" name="cplotNo" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Plot No" />
@@ -835,7 +945,7 @@ window.onbeforeunload = function () {
                                 <input placeholder="Ex: PinCode" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="cpinCodeId" name="cpinCode" maxlength="6" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Pincode" />
                             </div>
                         </td>
-                        <td valign="top">
+                       <%--  <td valign="top">
                             <div>
                                 <label><b>Site Address:</b></label> <span style="color: red;">*</span>
                                 <br />
@@ -864,7 +974,7 @@ window.onbeforeunload = function () {
 
                             </div>
                         </td>
-
+ --%>
                     </tr>
 
                     <tr class="tab2">
@@ -901,6 +1011,25 @@ window.onbeforeunload = function () {
                             <br />
                         </td>
 </tr>
+ <tr class="tab2">
+                        <td>
+                        <div>
+                                   <label><b>REQs of water<font style="color: rgb(128, 128, 128); font-size: 10px;"> (in KLD):</font></b></label> <span style="color: red;">*</span>
+                                       <input placeholder="Ex: 12345" type="text" id="reqMldId" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeypress="gst()" name="reqMld" style="margin-right: 5px;margin-left: 30px; width: 130px;" maxlength="5" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Requirement of water" />
+                                        <a href="library/MLD.pdf" download><img src="library/img/pdf-image.jpg" width="35px" height="40px" style="position: relative; cursor: pointer;"></a>
+                                </div>
+                            <!-- <div>
+                                <label><b>Type of water:</b></label> <span style="color: red;">*</span>
+                                <select class="classCategory" id="workTypeId" name="workType" style="margin-left: 76px;">
+                                    <option value="">--Select--</option>
+                                    <option value="1">Treated (Chloronated)</option>
+                                    <option value="1">Raw Water</option>
+                                    <option value="2">Secondary treated water</option>
+                                </select><img src="library/img/pdf-image.jpg" width="35px" height="40px" style="position: absolute; cursor: pointer;">
+                            </div> -->
+                            <br />
+                        </td>
+                    </tr>
 <tr class="tab2">
                         <td>
                         <div>
@@ -921,32 +1050,14 @@ window.onbeforeunload = function () {
                               <br/>
                         </td>
                     </tr>
-                      <tr class="tab2">
-                        <td>
-                        <div>
-                                   <label><b>REQs of water<font style="color: rgb(128, 128, 128); font-size: 10px;"> (in KLD):</font></b></label> <span style="color: red;">*</span>
-                                       <input placeholder="Ex: 12345" type="text" id="reqMldId" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeypress="gst()" name="reqMld" style="margin-right: 5px;margin-left: 30px; width: 130px;" maxlength="5" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Requirement of water" />
-                                        <a href="library/MLD.pdf" download><img src="library/img/pdf-image.jpg" width="35px" height="40px" style="position: relative; cursor: pointer;"></a>
-                                </div>
-                            <!-- <div>
-                                <label><b>Type of water:</b></label> <span style="color: red;">*</span>
-                                <select class="classCategory" id="workTypeId" name="workType" style="margin-left: 76px;">
-                                    <option value="">--Select--</option>
-                                    <option value="1">Treated (Chloronated)</option>
-                                    <option value="1">Raw Water</option>
-                                    <option value="2">Secondary treated water</option>
-                                </select><img src="library/img/pdf-image.jpg" width="35px" height="40px" style="position: absolute; cursor: pointer;">
-                            </div> -->
-                            <br />
-                        </td>
-                    </tr>
+                     
                        <tr class="tab2">
                         <td>
                             <div>
                                 <label><b>Availability of water:</b></label> <span style="color: red;">*</span>
                                 <select class="classCategory" id="availabilityId" name="availability" style="margin-left: 35px;">
                                     <option value="">--Select--</option>
-                                    <option value="1">From TWAD</option>
+                                    <option value="1">From TWAD CWSS</option>
                                     <option value="2">Need Dedicated Scheme</option>
                                 </select>
                             </div>
@@ -1008,7 +1119,7 @@ window.onbeforeunload = function () {
 
                  
                     <tr class="tab3">
-                        <td><b>Location sketch showing the points <font
+                        <td><b>Location sketch showing the points of requirement <font
 								style="color: rgb(128, 128, 128); font-size: 12px;">(Scale
 									not less than 1:400,.dwg file, 5 MB)</font>:
 						</b></td>
@@ -1039,13 +1150,14 @@ window.onbeforeunload = function () {
             </tr>
             <tr  class="tab3">
             
-            <td>
+            <td colspan="2">
              <br/>
             <a> Terms and Conditions</a><br/>
+            <ul>
            <li>The payment early will be given priority for consideration.</li>
            <li>TWAD reserves the right to cancel</li>
            <li>Preference & Consumenrs will be at the sole discreation of TWAD BD.HO</li>
-          
+          </ul>
             <input type="checkbox" id="checkAgreeId" name="checkAgree"/> <b>I Agree</b>
             
             </td>
@@ -1054,7 +1166,7 @@ window.onbeforeunload = function () {
 
             <tr>
 
-                <td align="center" valign="middle" colspan="2" height="70px;">
+                <td align="center" valign="middle" colspan="2" height="120px;">
                     <input type="button" id="tabBackId" />
                     <input type="button" id="registrationbtnId" name="industrialistSubmitBtn" value="Submit"  />
                     <input type="button" id="tabchangeId" style="margin-right: 185px;"/>

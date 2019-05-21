@@ -173,6 +173,7 @@ $(function(){
 			//alert(response.approvedApplication)
 			$('#pendingCount').text(response.penndingApplication);
 			$('#approvedCount').text(response.approvedApplication);
+			$('#transferCount').text(response.approvedApplication);
 			$('#rejectedCount').text(response.rejectedApplication);
 			
 			localStorage.setItem("localStorage_penndingApplication",response.penndingApplication);
@@ -200,11 +201,14 @@ $(function(){
 		if(url.indexOf("approvedApplication")>0){
 			$('ul li:nth-child(4)').addClass('selectionClass');
 		}
-		if(url.indexOf("rejectedApplication")>0){
+		if(url.indexOf("transferApplication")>0){
 			$('ul li:nth-child(5)').addClass('selectionClass');
 		}
-		if(url.indexOf("paymentViewAll")>0){
+		if(url.indexOf("rejectedApplication")>0){
 			$('ul li:nth-child(6)').addClass('selectionClass');
+		}
+		if(url.indexOf("paymentViewAll")>0){
+			$('ul li:nth-child(7)').addClass('selectionClass');
 			}
 	
 });
@@ -219,7 +223,8 @@ $(function(){
 	    <li><a href="index.do"> Home</a></li>
         <li><a href="paymentDashboard.do"> Dashboard</a></li>
 		<li><a href="registeredApplication.do"> Pending Application &nbsp; <span id="pendingCount"></span> </a><!-- <span>5</span> --></li>
-		<li><a href="approvedApplication.do"> Approved Application  &nbsp; <span id="approvedCount"></span></a></li>
+		<li><a href="approvedApplication.do"> Reassign Application  &nbsp; <span id="approvedCount"></span></a></li>
+		<li><a href="transferApplication.do"> Transfer Application  &nbsp; <span id="transferCount"></span></a></li>
 		<li><a href="rejectedApplication.do"> Rejected Application  &nbsp; <span id="rejectedCount"></span></a></li>
 		<li><a href="paymentViewAll.do">View All Application </a></li>
     </ul>

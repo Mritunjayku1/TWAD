@@ -65,7 +65,7 @@ $(function(){
 <tr>
 		<td colspan='8'
 			style='text-align: center; background-color: #FCFCF4; font-size: 17px; height: 10px; color: #800000; font-weight: bold;'>
-			Pending Applications</td>
+			Reassign Applications</td>
 	</tr>
 </table>
 

@@ -2099,6 +2099,64 @@ finally{
 
 	}
 	
+	
+	
+	
+	
+	@POST
+	@Path("/transferApplicationSave")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String transferApplicationSave(DDPaymentFormBean dDPaymentFormBean) {
+	Session	session = HibernateUtil.getSessionFactory().openSession();
+	Transaction transaction = session.beginTransaction();
+try{
+	transaction.begin();
+	CompanyDtl  companyDtl = (CompanyDtl) session.get(CompanyDtl.class, dDPaymentFormBean.getAppId());
+	companyDtl.setRegion((MasterRegion) session.get(MasterRegion.class, Integer.parseInt(dDPaymentFormBean.getRegion())));
+	companyDtl.setCircle((MasterCircle) session.get(MasterCircle.class, Integer.parseInt(dDPaymentFormBean.getCircle())));
+	companyDtl.setDivision((MasterHODivision) session.get(MasterHODivision.class, Integer.parseInt(dDPaymentFormBean.getDivision())));
+	companyDtl.setManagementComments(dDPaymentFormBean.getManagementComments());
+	session.update(companyDtl);
+	transaction.commit();
+	
+	//maha addedd
+	
+	
+	final Integer emailType=3;
+	final String status="test";
+	
+	final Integer smsType = 2;
+	final String smsTemp="Dear%20sir,%20Your%20"+dDPaymentFormBean.getAppId()+"%20Application%20Assigned%20to%20Executive%20Officer.";
+	final String smsTempEE="You%20have%20received%20Application"+dDPaymentFormBean.getAppId();
+	final String application_ID = dDPaymentFormBean.getAppId();
+	Thread notify = new Thread(new Runnable() {
+		@Override
+		public void run() {
+			SMSBuilder obj = new SMSBuilder();
+			obj.getSmsTemplate(application_ID,smsType,smsTemp);
+			obj.getStatus(application_ID, status);
+			
+			obj.getSmsTemplatetoEE(application_ID,smsType,smsTempEE);
+			obj.getStatustoEE(application_ID, status);
+		}
+	}, "notify");
+	notify.start();
+	
+}
+catch(Exception e){
+	e.printStackTrace();
+	transaction.rollback();
+	return "Application not Transfered";
+}
+finally{
+	session.close();
+}
+		return "Application Transfered";
+
+	}
+	
+	
+	
 	@POST
 	@Path("/registeredApplicationRejected")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -2444,6 +2502,14 @@ finally{
 
 	}
 	@POST
+	@Path("/transferApplication")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String transferApplication() {
+		return new Gson().toJson(new DashboardDaoImpl().transferApplication());
+
+	}
+	
+	@POST
 	@Path("/rejectedApplication")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String rejectedApplication() {
@@ -2521,6 +2587,10 @@ ddPaymentFormBean.setIntrPlumStatus(app.getIntrPlumStatus());
 ddPaymentFormBean.setWorkType(app.getWorkType());
 ddPaymentFormBean.setPaymentStatus(app.getPaymentStatus());
 ddPaymentFormBean.setCreateDate(app.getCreateTs().toString());
+
+ddPaymentFormBean.setMcUser(app.getMcUser());
+ddPaymentFormBean.setMcSLTCUser(app.getMcSLTCUser());
+ddPaymentFormBean.setMcBoardUser(app.getMcBoardUser());
 
 if(app.getActive()==1){
 	ddPaymentFormBean.setManagementComments(StatusConstant.HOUSER_ASSIGN_OFFICE);

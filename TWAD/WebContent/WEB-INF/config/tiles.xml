@@ -227,6 +227,12 @@
 		<put-attribute name="headerMenu" value="/WEB-INF/views/JSP/common/PaymentHeaderMenu.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/JSP/Application/approvedApplication.jsp"></put-attribute>
 	</definition>
+	<definition name="transferApplication" extends="CEbase.definition">
+		<put-attribute name="title" value="E-Water | Payment Dashboard"></put-attribute>
+		<put-attribute name="headerMenu" value="/WEB-INF/views/JSP/common/PaymentHeaderMenu.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/JSP/Application/transferApplication.jsp"></put-attribute>
+	</definition>
+	
 	<definition name="rejectedApplication" extends="CEbase.definition">
 		<put-attribute name="title" value="E-Water | Payment Dashboard"></put-attribute>
 		<put-attribute name="headerMenu" value="/WEB-INF/views/JSP/common/PaymentHeaderMenu.jsp"></put-attribute>

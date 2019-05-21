@@ -12,11 +12,15 @@
     <link href="library/assets/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 
 <style>
-
-#menu3{
-	background: #E05400;
-	background: -webkit-linear-gradient(top, #FFFFFF 3%, #E05400 30%);
-}
+ .bg_heading {
+	text-align: left;
+    font-size: 20px;
+    color: white;
+    margin-top: -32px;
+    margin-left: 135px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}  
+   
 input[type="search"]{
 height:30px !important;
 }
@@ -37,7 +41,64 @@ height:25px !important;
 <script type="text/javascript">
 
 $(function(){
-	$('input[name="approveBtn"]').click(function(){
+	
+	$('.paymentClass').click(function(){
+		appId = $(this).attr('id');
+		$(".ui-dialog-content").dialog("close");
+		$( "#addDialog" ).dialog({ 'width':'550px','modal':'true'});
+	}); 
+	
+	$('.closeBtn,.imgClose').click(function(){
+		$(".ui-dialog-content").dialog("close");
+		
+	}); 
+	
+	$('#userSaveBtnId').click(function(){
+		
+
+		var userCommentsId=$('#userCommentsId').val();
+		if(userCommentsId == null || userCommentsId=='')
+		{
+		alert("Please enter remarks !")
+		return false;
+		} 
+		
+		if(confirm("Are you sure want to Submit ?")){
+			 $.ajax({
+				type:"POST",
+				url:"mcApprovePayment.do",
+				data:{
+					'paymentDesc':$('#userCommentsId').val(),
+					'appId':appId,'mcUser':$("input[name='mcUser']:checked").val(),'referenceFile':$('#referenceFileId').val(),'referenceDate':$('#referenceDateId').val()},
+				success:function(response){
+					alert(response);
+					window.location.reload();
+					
+				}
+			});
+			}
+		
+	});
+	
+	
+	$(".inspectionDate").datepicker({
+		dateFormat : 'dd-mm-yy',
+		changeMonth : true,
+		changeYear : true,
+		//maxDate : new Date(),
+		showOn : "button",
+		minDate : 0,
+		maxDate : "+2Y",
+		buttonImageOnly : true,
+	//	buttonText : "Select date",
+		buttonImage : "library/img/datepicker.png",
+		showAnim : "slideDown",
+	});
+	
+	
+	
+	
+	/* $('input[name="approveBtn"]').click(function(){
 		var appRef = $(this).attr('id');
 		var remarks=$(this).closest('tr').find('td:nth-child(8)').find('input[type="text"]').val();
 		$.ajax({
@@ -51,9 +112,42 @@ $(function(){
 			}
 		});
 		
-	});
+	}); */
 });
 </script>
+
+<div id="addDialog" style="display: none;">
+
+
+<img class="imgClose" src="library/img/Close_SMS.png"
+			style="width: 40px; border-width: 0px; float: right; margin-top: -43px; margin-right: -5px; cursor: pointer;">
+		<h2 class="bg_heading">Select User Type</h2>
+		<table width="80%" align="center">
+		<tr>
+		<td align="center"><input type="radio" name="mcUser" id="rtcId" value="RTC" checked="checked"/>SE</td>
+		<td align="center"><input type="radio" name="mcUser" id="sltcId"  value="SLTC"/>CE</td>
+		<td align="center"><input type="radio" name="mcUser" id="boardId" value="Board"/>Board</td>
+		</tr>
+		
+		<tr><td><span><b>Reference File:</b></span></td><td>
+			<input placeholder="Reference File" type="text" id="referenceFileId" name="referenceFile"  /></td></tr>
+
+<tr><td><span><b>Reference Date:</b></span></td><td>
+			<input placeholder="Ex: DD-MM-YYYY" type="text" class="inspectionDate"  id="referenceDateId" name="referenceDate" readonly="readonly"  style="background-color: lightgrey;"/></td></tr>
+		<tr>
+		<td><span><b>Remarks:</b></span> <span style="color: red;">*</span></td><td>
+		<textarea id="userCommentsId" name="userComments" style="width:78%;height:100%;"></textarea>
+		</td>
+		
+		</tr>
+		
+		<tr height="10px"></tr>
+<tr><td colspan="3" align="center">
+				<input type="button" value="Save" id="userSaveBtnId"/> <input type="button" value="Close"  class="closeBtn"/>
+			</td></tr></table>	
+		</div>
+		
+
 <table class='table-bordered table table-striped display'
 	style='width: 100%; font-size: 28px;'>
 <tr>
@@ -88,13 +182,17 @@ $(function(){
                                             <th style="color:black !important"><b>App Ref#</b></th>
                                             <th style="color:black !important"><b> Name of Company</b></th>
                                              <th style="color:black !important"><b> Contact Person Name</b></th>
-                                            <th style="color:black !important"><b>Category Type</b></th>
+                                          <!--   <th style="color:black !important"><b>Category Type</b></th> -->
                                              <th style="color:black !important"><b>Site Address</b></th>
-                                             <th style="color:black !important"><b>Mobile No</b></th>
-                                             <th style="color:black !important"><b>Email</b></th>
+                                            <!--  <th style="color:black !important"><b>Mobile No</b></th>
+                                             <th style="color:black !important"><b>Email</b></th> -->
                                              <th style="color:black !important"><b>Division Name</b></th>
-                                             <th style="color:black !important"><b>REQs MLD</b></th> 
+                                            <!--  <th style="color:black !important"><b>REQs MLD</b></th>  -->
                                              <th style="color:black !important"><b>Status</b></th>
+                                              <th style="color:black !important"><b>SE Remarks</b></th>
+                                                <th style="color:black !important"><b>CE Remarks</b></th>
+                                                 <th style="color:black !important"><b>Board Remarks</b></th>
+                                                 <th></th>
                                         
                                         </tr>
                                     </thead>
@@ -109,14 +207,19 @@ $(function(){
           							<td > <a href="EEViewForm.do?appId=${app.getAppId()}" style="color: rgb(128,128,128)">${app.getAppId()}</a></td>
                                             <td>${app.getLegCompName()}</td>
                                             <td>${app.getContactPersonName()}</td>
-                                             <td>${app.getCategoryType()}</td>
+                                            <%--  <td>${app.getCategoryType()}</td> --%>
                                             <td class="center">${app.getDoorNo()} ${app.getPlotNo()} ${app.getStreetName()},${app.getPinCode()} </td>
-                                          <td>${app.getMobileNum()}</td>
-                                          <td>${app.getEmailAddr()}</td>
+                                         <%--  <td>${app.getMobileNum()}</td>
+                                          <td>${app.getEmailAddr()}</td> --%>
                                              <td class="center">${app.getDivisionName()}</td>
-                                             <td class="center">${app.getReqMld()}</td>
+                                            <%--  <td class="center">${app.getReqMld()}</td> --%>
                                               <td class="center"><textarea  name="managementComments" style="width:100%;height:100%;">${app.getManagementComments()}</textarea></td>
-                                                
+                                                 <td class="center">${app.getMcUser()}</td>
+                                           <td class="center">${app.getMcSLTCUser()}</td>
+                                            <td class="center">${app.getMcBoardUser()}</td>
+                                            <td><input type="button"
+													class="paymentClass" id="${app.getAppId()}" value="Add Process Status"
+													style="width: auto;"/></td>
                                         </tr>	 
           									 
           							 </c:forEach>

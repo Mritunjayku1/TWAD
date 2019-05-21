@@ -109,6 +109,14 @@ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 			<td></td>
 		</tr>
 			</table>
+			<%
+			
+			pageContext.setAttribute("1", "Application Fee");
+			pageContext.setAttribute("2", "Upfront Charges");
+			pageContext.setAttribute("3", "Full Payment");
+			
+			
+			%>
 <table id="statusHeader" align="center" class="table-bordered table table-striped display" style="width: 970px;">
 
 	<tbody><tr>
@@ -124,6 +132,7 @@ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 <tr><td align="left" colspan="2"><b>Bank Ref No</b></td><td colspan="2">:<span>${bankRefNo}</span></td></tr>
 <tr><td align="left" colspan="2"><b>Application No</b></td><td colspan="2">:<span>${applicationRef}</span></td></tr>
 <tr><td align="left" colspan="2"><b>Paid Amount</b></td><td colspan="2">:<span>${paidAmount}</span></td></tr>
+<tr><td align="left" colspan="2"><b>Payment Type</b></td><td colspan="2">:<span>${${paymentType}}</span></td></tr>
 
 
 </table>
