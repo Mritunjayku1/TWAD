@@ -69,6 +69,29 @@ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
  </style>
 </head>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	
+	var paymentTypeId = $('#hPaymentTypeId').val();
+	
+	if(paymentTypeId==1){
+		$('#paymentTypeId').text("Application Fee");
+	}
+	else if(paymentTypeId==2){
+		$('#paymentTypeId').text("Upfront Charges");
+	}
+	else if(paymentTypeId==3){
+		$('#paymentTypeId').text("Full Payment");
+	}
+	
+	
+});
+
+
+</script>
+
 <body style="margin:0px;padding:0px">
 
 <%-- <a href="callEasyBusiness.do?appId=${applicationRef}"  id="callEasyId"></a> --%>
@@ -109,14 +132,6 @@ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 			<td></td>
 		</tr>
 			</table>
-			<%
-			
-			pageContext.setAttribute("1", "Application Fee");
-			pageContext.setAttribute("2", "Upfront Charges");
-			pageContext.setAttribute("3", "Full Payment");
-			
-			
-			%>
 <table id="statusHeader" align="center" class="table-bordered table table-striped display" style="width: 970px;">
 
 	<tbody><tr>
@@ -124,6 +139,8 @@ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	</tr>
 	
 </tbody></table>
+<input type="hidden" id="hPaymentTypeId" value="${paymentType}"  />
+
 <table width="60%" id="ackTable" align="center" style="font-size: 20px;margin-left: 265px;margin-top: 10px;">
 
 
@@ -132,7 +149,7 @@ font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 <tr><td align="left" colspan="2"><b>Bank Ref No</b></td><td colspan="2">:<span>${bankRefNo}</span></td></tr>
 <tr><td align="left" colspan="2"><b>Application No</b></td><td colspan="2">:<span>${applicationRef}</span></td></tr>
 <tr><td align="left" colspan="2"><b>Paid Amount</b></td><td colspan="2">:<span>${paidAmount}</span></td></tr>
-<tr><td align="left" colspan="2"><b>Payment Type</b></td><td colspan="2">:<span>${${paymentType}}</span></td></tr>
+<tr><td align="left" colspan="2"><b>Payment Type</b></td><td colspan="2">:<span id="paymentTypeId"></span></td></tr>
 
 
 </table>

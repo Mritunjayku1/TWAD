@@ -2544,6 +2544,7 @@ finally{
 	}
 
 	
+	
 	@GET
 	@Path("/ddPaymentViewAllList")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -2631,6 +2632,99 @@ else if(app.getActive()==3 && app.getPaymentStatus()==0){
 
 		return new Gson().toJson(ddPaymentFormBeanList);
 	}
+	
+	
+	
+	
+	@POST
+	@Path("/eeViewAll")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String eeViewAll(CompanyDtlBean companyDtlBean){
+		
+		List<CompanyDtl> companyDtlsList = new DashboardDaoImpl().eeViewAll(companyDtlBean);
+		List<DDPaymentFormBean> ddPaymentFormBeanList = new ArrayList<>();
+		for (CompanyDtl app : companyDtlsList) {
+			DDPaymentFormBean ddPaymentFormBean = new DDPaymentFormBean();
+
+ddPaymentFormBean.setAppId(app.getAppId());
+ddPaymentFormBean.setLegCompName(app.getLegCompName());
+ddPaymentFormBean.setCdoorNo(app.getCdoorNo());
+ddPaymentFormBean.setCplotNo(app.getCplotNo());
+ddPaymentFormBean.setCstreetName(app.getCstreetName());
+ddPaymentFormBean.setClocation(app.getClocation());
+ddPaymentFormBean.setCpinCode(app.getCpinCode());
+ddPaymentFormBean.setSalutation(app.getSalutation());
+ddPaymentFormBean.setContactPersonName(app.getContactPersonName());
+ddPaymentFormBean.setMobileNum(app.getMobileNum());
+ddPaymentFormBean.setEmailAddr(app.getEmailAddr());
+ddPaymentFormBean.setCategoryType(app.getCategoryType().getCategoryName());
+if(null != app.getDivision())
+ddPaymentFormBean.setDivisionName(app.getDivision().getDivisionName());
+
+ddPaymentFormBean.setAddrPremSought(app.getAddrPremSought());
+ddPaymentFormBean.setDoorNo(app.getDoorNo());
+ddPaymentFormBean.setPlotNo(app.getPlotNo());
+ddPaymentFormBean.setStreetName(app.getStreetName());
+ddPaymentFormBean.setLocation(app.getLocation());
+ddPaymentFormBean.setDistrict(app.getDistrict().getDistrictName());
+ddPaymentFormBean.setTaluk(app.getTaluk().getTalukName());
+ddPaymentFormBean.setVillage(app.getVillage().getVillageName());
+ddPaymentFormBean.setPincode(app.getPinCode());
+ddPaymentFormBean.setSurveyFieldNo(app.getSurveyFieldNo());
+ddPaymentFormBean.setIsNewConnection(app.getIsNewConnection());
+ddPaymentFormBean.setReqMld(app.getReqMld());
+ddPaymentFormBean.setGstAmount(app.getGstAmount());
+ddPaymentFormBean.setTotalAmount(app.getTotalAmount());
+ddPaymentFormBean.setIntrPlumStatus(app.getIntrPlumStatus());
+ddPaymentFormBean.setWorkType(app.getWorkType());
+ddPaymentFormBean.setPaymentStatus(app.getPaymentStatus());
+ddPaymentFormBean.setCreateDate(app.getCreateTs().toString());
+
+ddPaymentFormBean.setMcUser(app.getMcUser());
+ddPaymentFormBean.setMcSLTCUser(app.getMcSLTCUser());
+ddPaymentFormBean.setMcBoardUser(app.getMcBoardUser());
+
+if(app.getActive()==1){
+	ddPaymentFormBean.setManagementComments(StatusConstant.HOUSER_ASSIGN_OFFICE);
+}
+else if(app.getActive()==2 && app.getEeStatus().getStatusId()==1 && app.getPaymentStatus()==0){
+	ddPaymentFormBean.setManagementComments(StatusConstant.EEUSER_PENDING_APPLICATION_FEE);
+}
+else if(app.getActive()==2 && app.getEeStatus().getStatusId()==1  && app.getPaymentStatus()==1){
+	ddPaymentFormBean.setManagementComments(StatusConstant.EEUSER_PAID_APPLICATION_FEE);
+}
+else if(app.getActive()==2 && app.getEeStatus().getStatusId()==2 && app.getPaymentStatus()==0){
+	ddPaymentFormBean.setManagementComments(StatusConstant.EEUSER_APPROVED_APPLICATION_FEE+"\n"+StatusConstant.EEUSER_PENDING_UPFRONT_CHARGES);
+}
+else if(app.getActive()==2 && app.getEeStatus().getStatusId()==2  && app.getPaymentStatus()==1){
+	ddPaymentFormBean.setManagementComments(StatusConstant.EEUSER_PAID_UPFRONT_CHARGES);
+}
+else if(app.getActive()==2 && app.getEeStatus().getStatusId()==3  && app.getPaymentStatus()==0){
+	ddPaymentFormBean.setManagementComments(StatusConstant.MCUSER_APPROVED_FULL_PAYMENT +"\n"+StatusConstant.EEUSER_PENDING_FULL_PAYMENT);
+}
+else if(app.getActive()==2 && app.getEeStatus().getStatusId()==3  && app.getPaymentStatus()==1){
+	ddPaymentFormBean.setManagementComments(StatusConstant.EEUSER_PAID_FULL_PAYMENT);
+}
+else if(app.getActive()==2 && app.getEeStatus().getStatusId()==4){
+	ddPaymentFormBean.setManagementComments(StatusConstant.EEUSER_APPROVED_FULL_PAYMENT);
+}
+/*else if(app.getActive()==2 && app.getEeStatus().getStatusId()==1){
+	ddPaymentFormBean.setManagementComments(StatusConstant.EEUSER_WAITING_INSPECTION);
+}*/
+else if(app.getActive()==3 && app.getPaymentStatus()==0){
+	ddPaymentFormBean.setManagementComments(StatusConstant.EEUSER_APPROVED_UPFRONT_CHARGES+"\n"+StatusConstant.MCUSER_PENDING_FULL_PAYMENT_APPROVAL);
+}
+
+
+			
+			ddPaymentFormBeanList.add(ddPaymentFormBean);
+		}
+		
+
+		return new Gson().toJson(ddPaymentFormBeanList);
+	}
+	
+	
 	
 
 	@POST
@@ -2775,7 +2869,7 @@ ddPaymentFormBean.setPaymentList(ddPaymentFormBeans);
 	@POST
 	@Path("/geteeDashboardCount")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String geteeDashboardCount() {
+	public String geteeDashboardCount(CompanyDtlBean companyDtlBean) {
 
 		dashboardDao = new DashboardDaoImpl();
 		gson = new Gson();
@@ -2783,7 +2877,7 @@ ddPaymentFormBean.setPaymentList(ddPaymentFormBeans);
 		//DashboardBean dashboardBean = new DashboardBean();
 		DashboardCountBean dashboardCountBean=new DashboardCountBean();
 
-		for (Object[] rowData : dashboardDao.geteeDashboardCount()) {
+		for (Object[] rowData : dashboardDao.geteeDashboardCount(companyDtlBean)) {
 			dashboardCountBean.setApplicationFeePending(Integer.parseInt(rowData[0]
 					.toString()));
 			dashboardCountBean.setUpfrontChargesPending(Integer.parseInt(rowData[1]

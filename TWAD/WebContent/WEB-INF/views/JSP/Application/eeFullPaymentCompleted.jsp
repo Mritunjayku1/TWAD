@@ -157,14 +157,16 @@ function validateAddForm() {
                                             <th style="color:black !important"><b>App Ref#</b></th>
                                             <th style="color:black !important"><b> Name of Company</b></th>
                                              <th style="color:black !important"><b> Name of Person</b></th>
-                                              <th style="color:black !important"><b>Payment Type</b></th>
-                                            <th style="color:black !important"><b>Total Payment Amount</b></th>
-                                            <th style="color:black !important"><b>DD NO</b></th>
+                                             <!--  <th class="class4" style="color:black !important"><b>Division Name</b></th> -->
+                                           <!--  <th style="color:black !important"><b>Total Payment Amount</b></th>
+                                             <th class="class22" style="color:black !important"><b>Transaction Ref No</b></th>
+                                            <th class="class23" style="color:black !important"><b>Bank Ref No</b></th> -->
+                                           <!--  <th style="color:black !important"><b>DD NO</b></th>
                                              <th style="color:black !important"><b>DD Date</b></th>
-                                            <th style="color:black !important"><b>DD Bank Name</b></th>
-                                           <!--  <th style="color:black !important"><b>Payment Status</b></th> -->
-                                             <th style="color:black !important"><b>Registered Date</b></th>
-                                             <!-- <th style="color:black !important"><b>Management Comments</b></th> -->
+                                            <th style="color:black !important"><b>DD Bank Name</b></th> -->
+                                          <!--   <th style="color:black !important"><b>Payment Status</b></th> -->
+                                            <!--  <th style="color:black !important"><b>Receipt Date</b></th> -->
+                                            <!--  <th style="color:black !important"><b>Remarks</b></th> -->
                                               <th></th>
                                         
                                         </tr>
@@ -174,27 +176,32 @@ function validateAddForm() {
                                      <c:forEach items="${list.appBean}" var="app" >
           
           							
-          									 
+          										 
           								<tr class="odd gradeX">
           							<td > <a href="EEViewForm.do?appId=${app.getAppId()}" style="color: rgb(128,128,128)">${app.getAppId()}</a></td>
                                             <td>${app.getLegCompName()}</td>
                                             
                                              <td>${app.getContactPersonName()}</td>
-                                             <td>${app.getPaymentType()}</td>
-                                               <td>${app.getPaymentAmount()}</td>
-                                                <td id="ddNo_${app.getAppId()}">${app.getDdNo()}</td>
+                                             <%--  <td class="class4" >${app.getDivisionName()}</td> --%>
+                                             <%--   <td id="payment_${app.getAppId()}">${app.getPaymentAmount()}</td>
+                                                
+                                             <td class="class22" >${app.getTransactionRefNo()}</td>
+                                             <td class="class23" >${app.getBankRefNo()}</td> --%>
+                                               <%--  <td id="ddNo_${app.getAppId()}">${app.getDdNo()}</td>
                                                  <td>${app.getDdDate()}</td>
-                                                  <td>${app.getDdBankName()}</td>
-                                                 <%--   <td>${app.getPaymentStatusDisplay()}</td> --%>
+                                                  <td>${app.getDdBankName()}</td> --%>
+                                                  <%--  <td>${app.getPaymentStatusDisplay()}</td> --%>
                                            
-                                             <td class="center">${app.getCreateTs()}</td>
-                                            <%--   <td class="center"><textarea id="managementComments_${app.getAppId()}" name="managementComments" style="width:100%;height:100%;"></textarea></td>
-                                             --%>  
-                                             <td class="center"><input type="button"
+                                            <%--  <td class="class10" class="center"><input type="text" title="dd-mm-yyyy" id="receiptDate_${app.getAppId()}"  class="receiptDate" style="width: 100px;height: 25px;"/></td> --%>
+                                             <%--  <td class="center"><textarea id="managementComments_${app.getAppId()}" name="managementComments" style="width:100%;height:100%;"></textarea></td> --%>
+                                              
+                                               <td class="center"><input type="button"
 												name="approveBtn" id="${app.getAppId()}"
 												value="Send SMS/ Email" /></td>
                                            
-                                        </tr>	 
+                                        </tr> 
+                                            
+                                           
           									 
           							 </c:forEach>
                           

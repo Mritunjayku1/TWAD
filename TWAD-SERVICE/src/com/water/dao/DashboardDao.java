@@ -53,7 +53,7 @@ public interface DashboardDao {
 	public String  paymentApproved(ApplicationBean applicationBean);
 	
 	public List<Object[]> getceDashboardCount();
-	public List<Object[]> geteeDashboardCount();
+	public List<Object[]> geteeDashboardCount(CompanyDtlBean companyDtlBean);
 	public String getMCDashboardCount();
 	public List<Object[]> getPaymentDashboardCount();
 	

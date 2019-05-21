@@ -188,12 +188,12 @@ $(function() {
 		legCompName=appIdArray[3];
 		contactPersonName=appIdArray[4];
 		
-		/* var ddNo=$('#ddNo_'+appId).text();
-		if(ddNo == null || ddNo=='')
+		 var payment=$('#payment_'+appId).text();
+		if(payment == null || payment=='')
 		{
-		alert("Applicant not submitted DD !")
+		alert("Application fee not paid !")
 		return false;
-		} */
+		}
 		
 		$('#appId').val(appId);
 		$('#legCompName').val(legCompName);
@@ -653,7 +653,7 @@ $(function(){
                                             
                                              <td class="class3" >${app.getContactPersonName()}</td>
                                              <td class="class4" >${app.getDivisionName()}</td>
-                                               <td class="class5" >${app.getPaymentAmount()}</td>
+                                               <td class="class5"  id="payment_${app.getAppId()}">${app.getPaymentAmount()}</td>
                                                 <td class="class22" >${app.getTransactionRefNo()}</td>
                                              <td class="class23" >${app.getBankRefNo()}</td>
                                                 <td class="class6"  id="ddNo_${app.getAppId()}">${app.getDdNo()}</td>

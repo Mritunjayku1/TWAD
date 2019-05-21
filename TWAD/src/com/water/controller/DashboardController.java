@@ -258,7 +258,7 @@ public class DashboardController {
 		}
 		@RequestMapping(value = "/eeViewAll", method = RequestMethod.GET)
 	public ModelAndView eeViewAll(
-			@ModelAttribute("dashboardForm") ComplaintBean complaintBean)
+			@ModelAttribute("dashboardForm") ComplaintBean complaintBean, HttpSession session)
 			throws JSONException {
 
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -268,12 +268,19 @@ public class DashboardController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 
-		HttpEntity<?> entity = new HttpEntity(headers);
+CompanyDtlBean companyDtlBean = new CompanyDtlBean();
+		
+		if(null != session.getAttribute("OfficeId")){
+			  companyDtlBean.setDivision(session.getAttribute("OfficeId").toString());
+			}
+		
+		
+		HttpEntity<?> entity = new HttpEntity(companyDtlBean,headers);
 
 		ResponseEntity<String> out = restTemplate.exchange(
-				WaterDashboardService + "ddPaymentViewAllList",
+				WaterDashboardService + "eeViewAll",
 
-				HttpMethod.GET, entity, String.class);
+				HttpMethod.POST, entity, String.class);
 
 		JSONArray jsonArray = new JSONArray(out.getBody().toString());
 
@@ -3395,15 +3402,21 @@ ResponseEntity<String> out = restTemplate.exchange(
 	
 	@RequestMapping(value = "/getEEDashboardCount", method = RequestMethod.GET)
 	@ResponseBody
-	public String getEEDashboardCount() {
+	public String getEEDashboardCount(HttpSession session) {
 
 
 		RestTemplate restTemplate = new RestTemplate();
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-
-		HttpEntity<?> entity = new HttpEntity(headers);
+ 
+		CompanyDtlBean companyDtlBean = new CompanyDtlBean();
+		
+		if(null != session.getAttribute("OfficeId")){
+			  companyDtlBean.setDivision(session.getAttribute("OfficeId").toString());
+			}
+		
+		HttpEntity<?> entity = new HttpEntity(companyDtlBean,headers);
 
 		ResponseEntity<String> out = restTemplate.exchange(
 				WaterDashboardService + "geteeDashboardCount", HttpMethod.POST,

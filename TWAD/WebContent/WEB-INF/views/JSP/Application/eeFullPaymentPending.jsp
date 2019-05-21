@@ -51,24 +51,18 @@ $(function(){
 
 		
 
-		var ddNo=$('#ddNo_'+appId).text();
-		if(ddNo == null || ddNo=='')
-		{
-		alert("Applicant not submitted DD !")
-		return false;
-		}
-		
-		var managementComments=$('#managementComments_'+appId).val();
-		if(managementComments == null || managementComments=='')
-		{
-		alert("Please enter the Comments !")
-		return false;
-		}
+		 var payment=$('#payment_'+appId).text();
+			if(payment == null || payment=='')
+			{
+			alert("Full Payment not paid !")
+			return false;
+			}
+			
 		if(confirm("Are you sure want to Approve ? ")){
 		$.ajax({
 			type:"POST",
 			url:"eePaymentPendingApproved.do",
-			data:{'appId':appId,'paymentTypeDesc':managementComments,'companyPaymentDtlID':companyPaymentDtlID},
+			data:{'appId':appId,'companyPaymentDtlID':companyPaymentDtlID},
 			success:function(response){
 				alert(response);
 				window.location.reload();
@@ -161,7 +155,7 @@ $(function(){
                                             
                                              <td>${app.getContactPersonName()}</td>
                                               <td class="class4" >${app.getDivisionName()}</td>
-                                               <td>${app.getPaymentAmount()}</td>
+                                               <td id="payment_${app.getAppId()}">${app.getPaymentAmount()}</td>
                                                 
                                              <td class="class22" >${app.getTransactionRefNo()}</td>
                                              <td class="class23" >${app.getBankRefNo()}</td>
@@ -174,7 +168,7 @@ $(function(){
                                              <%--  <td class="center"><textarea id="managementComments_${app.getAppId()}" name="managementComments" style="width:100%;height:100%;"></textarea></td> --%>
                                               
                                               <td class="center">
-                                              <input type="button" class="paymentClass" id="approved_${app.getAppId()}_${app.getCompanyPaymentDtlID()}" name="approvedBtn" style="width: auto;" value="Approved"/>
+                                              <input type="button" class="paymentClass" id="approved_${app.getAppId()}_${app.getCompanyPaymentDtlID()}" name="approvedBtn" style="width: auto;" value="Accept Payment..."/>
 											 <%--  <button class="cancelbtn" id="rejected_${app.getAppId()}_${app.getCompanyPaymentDtlID()}" name="rejectedBtn" style="width: auto;">Rejected</button> --%>
 											  </td>
                                            

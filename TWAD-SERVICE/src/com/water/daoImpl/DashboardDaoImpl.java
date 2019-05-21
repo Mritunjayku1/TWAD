@@ -1858,6 +1858,33 @@ public class DashboardDaoImpl implements DashboardDao {
 		return appDetails;
 	}
 
+	
+	public List<CompanyDtl> eeViewAll(CompanyDtlBean companyDtlBean) {
+		// TODO Auto-generated method stub
+
+		
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+		List<CompanyDtl> appDetails = new ArrayList<CompanyDtl>();
+		try {
+			
+           Criteria cr = session.createCriteria(CompanyDtl.class,"CompanyDtl")
+        		   .createCriteria("CompanyDtl.division","hoDivision")
+        		   .add(Restrictions.eq("hoDivision.divisionId", Integer.parseInt(companyDtlBean.getDivision())));
+					
+			
+			appDetails=cr.list();
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return appDetails;
+	}
+
+	
 	@Override
 	public CompanyDtl paymentViewForm(DDPaymentFormBean ddPaymentFormBean) {
 		// TODO Auto-generated method stub
@@ -1948,7 +1975,7 @@ public class DashboardDaoImpl implements DashboardDao {
 
 	
 	@Override
-	public List<Object[]> geteeDashboardCount() {
+	public List<Object[]> geteeDashboardCount(CompanyDtlBean companyDtlBean) {
 
 		Session session = sessionFactory.openSession();
 		StringBuffer sqlQreyString = new StringBuffer();
@@ -1959,6 +1986,7 @@ public class DashboardDaoImpl implements DashboardDao {
 		
 		
 		SQLQuery query = session.createSQLQuery(sqlQreyString.toString());
+		query.setParameter("divisionId", companyDtlBean.getDivision());
 		dashBoardCount = query.list();
 		return dashBoardCount;
 
