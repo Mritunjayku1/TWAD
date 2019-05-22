@@ -1986,7 +1986,7 @@ public class DashboardDaoImpl implements DashboardDao {
 		
 		
 		SQLQuery query = session.createSQLQuery(sqlQreyString.toString());
-		query.setParameter("divisionId", companyDtlBean.getDivision());
+		query.setParameter("divisionId", Integer.parseInt(companyDtlBean.getDivision()));
 		dashBoardCount = query.list();
 		return dashBoardCount;
 

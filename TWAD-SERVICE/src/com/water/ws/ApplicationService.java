@@ -382,8 +382,8 @@ catch(Exception e){
 		if(appFormBean.getStatusFlag()=='Y')
 		{
 		final Integer smsType = 1;
-		final String smsTemp="Thank%20you%20for%20Registering%20Water%20Connection%20Your%20CMWSSB%20App%20No%20"+appFormBean.getAppId();
-		
+		//final String smsTemp="Thank%20you%20for%20Registering%20Water%20Connection%20Your%20CMWSSB%20App%20No%20"+appFormBean.getAppId();
+		final String smsTemp="Thank%20you%20for%20Payment%20Water%20Connection%20TWAD%20App%20No%20"+appFormBean.getAppId();
 		final String application_ID = applicationDtls.getAppId();
 		Thread notify = new Thread(new Runnable() {
 			@Override

@@ -189,9 +189,9 @@ $(function(){
                                              <th style="color:black !important"><b>Division Name</b></th>
                                             <!--  <th style="color:black !important"><b>REQs MLD</b></th>  -->
                                              <th style="color:black !important"><b>Status</b></th>
-                                              <th style="color:black !important"><b>SE Remarks</b></th>
-                                                <th style="color:black !important"><b>CE Remarks</b></th>
-                                                 <th style="color:black !important"><b>Board Remarks</b></th>
+                                           <th style="color:black !important"><b>SE-Process Status</b></th>
+                                                <th style="color:black !important"><b>CE-Process Status</b></th>
+                                                 <th style="color:black !important"><b>Board-Process Status</b></th>
                                                  <th></th>
                                         
                                         </tr>

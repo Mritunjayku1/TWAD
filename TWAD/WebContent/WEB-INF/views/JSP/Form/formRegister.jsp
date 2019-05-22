@@ -109,11 +109,11 @@ window.onbeforeunload = function () {
 		
 		
 		
-		 $("#legCompNameId").val("Jay Test");
+		 $("#legCompNameId").val("");
 		$("#correspondenceAddrId").val("");
-		$("#contactPersonNameId").val("Jay");
-		$("#mobileNumId").val("+919677096448");
-		$("#emailAddrId").val("mritunjayku1@gmail.com");
+		$("#contactPersonNameId").val("");
+		$("#mobileNumId").val("");
+		$("#emailAddrId").val("");
 		$("#categoryTypeId").val("1");
 		$("#reqMldId").val("1234");
 		$("#workTypeId").val("1");
@@ -846,7 +846,7 @@ window.onbeforeunload = function () {
                             <div>
                                 <label><b>Mobile Number:</b></label> <span style="color: red;">*</span>
                                 <br />
-                                <input  type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57 && event.charCode = 43' id="mobileNumId" name="mobileNum" maxlength="13" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Mobile No." />
+                                <input placeholder="+919688244643"  type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57 && event.charCode = 43' id="mobileNumId" name="mobileNum" maxlength="13" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Mobile No." />
                             </div>
                             <br />
                         </td>
