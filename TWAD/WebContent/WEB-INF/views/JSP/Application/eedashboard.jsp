@@ -124,10 +124,8 @@ table.display .td {
 <script  type="text/javascript">
 $(window).load(function(){
 	
-
-	//var applicationFeeCount = parseInt($('#applicationFeeCount').val());
-	//var upfrontChargesCount = parseInt($('#upfrontChargesCount').val());
-	//var fullPaymentCount = parseInt($('#fullPaymentCount').val());
+	setTimeout(function(){ 
+		
 	
 	var applicationFeeCount = parseInt(localStorage.getItem("localStorage_applicationFeePending"));
 	var upfrontChargesCount = parseInt(localStorage.getItem("localStorage_upfrontChargesPending"));
@@ -157,6 +155,7 @@ $(window).load(function(){
 
 	fnPlotPieChart(data, "compliantDashboard", "Total Application:" + (applicationFeeCount + upfrontChargesCount + fullPaymentCount + fullPaymentCompletedCount + executionCount));
 
+  }, 1000);
 });
 	</script>
 

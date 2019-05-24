@@ -2773,11 +2773,11 @@ else if(app.getIsNewConnection()!=null && app.getIsNewConnection()==1){
 }
 
 ddPaymentFormBean.setReqMld(app.getReqMld());
-ddPaymentFormBean.setApplicationFee(app.getApplicationFee()+"");
+/*ddPaymentFormBean.setApplicationFee(app.getApplicationFee()+"");
 ddPaymentFormBean.setGstPercent(app.getGstPercent()+"");
 ddPaymentFormBean.setUpfrontCharges(app.getUpfrontCharges());
 ddPaymentFormBean.setGstAmount(app.getGstAmount());
-ddPaymentFormBean.setTotalAmount(app.getTotalAmount());
+ddPaymentFormBean.setTotalAmount(app.getTotalAmount());*/
 
 /*ddPaymentFormBean.setIntrPlumStatus(app.getIntrPlumStatus());
 
@@ -2843,15 +2843,33 @@ else if(app.getActive()==3 && app.getPaymentStatus()==0){
 }	
 
 }
+
+
+List<MasterPayment> masterPaymentList = new DashboardDaoImpl().getManagementSetpaymentList(ddPaymentFormBean.getAppId());
+for(MasterPayment masterPayment :masterPaymentList){
+	
+	if(masterPayment.getPaymentType().getPaymentTypeId()==1){
+		ddPaymentFormBean.setApplicationFee(masterPayment.getPaymentAmount()+"");
+		ddPaymentFormBean.setGstPercent(masterPayment.getGstPercent()+"");
+		ddPaymentFormBean.setGstAmount(masterPayment.getGstAmount());
+		ddPaymentFormBean.setTotalAmount(masterPayment.getTotalAmount());
+	}
+	else if(masterPayment.getPaymentType().getPaymentTypeId()==2)
+	   ddPaymentFormBean.setUpfrontCharges(Integer.parseInt(masterPayment.getTotalAmount()));
+	else if(masterPayment.getPaymentType().getPaymentTypeId()==3)
+		   ddPaymentFormBean.setFullPayment(Integer.parseInt(masterPayment.getTotalAmount()));
+	
+}
+
+
 List<DDPaymentFormBean> ddPaymentFormBeans = new ArrayList<>();
 
-List<CompanyPaymentDtl> companyPaymentDtlList = new DashboardDaoImpl().getpaymentList(ddPaymentFormBean.getAppId());
+List<CompanyPaymentDtl> companyPaymentDtlList = new DashboardDaoImpl().getUserPaymentList(ddPaymentFormBean.getAppId());
 
 for(CompanyPaymentDtl companyPaymentDtl :companyPaymentDtlList){
 	DDPaymentFormBean ddPaymentBean = new DDPaymentFormBean();
-	ddPaymentBean.setDdNo(companyPaymentDtl.getDdNo());
-	ddPaymentBean.setDdDate(companyPaymentDtl.getDdDate());
-	ddPaymentBean.setDdBankName(companyPaymentDtl.getDdBankName());
+	ddPaymentBean.setTransactionRefNo(companyPaymentDtl.getTransactionRefNo());
+	ddPaymentBean.setBankRefNo(companyPaymentDtl.getBankRefNo());
 	
 	ddPaymentBean.setPaymentType(companyPaymentDtl.getPaymentType().getPaymentType());
 	ddPaymentBean.setPaymentAmount(companyPaymentDtl.getPaymentAmount());
@@ -3474,6 +3492,8 @@ DashboardCountBean dashboardBean;
 		
 			PaymentFormBean employeeFormBean = new PaymentFormBean();
 			
+			if(null != masterPayment.getAppId())
+			employeeFormBean.setAppId(masterPayment.getAppId().getAppId());
 			employeeFormBean.setPaymentId(String.valueOf(masterPayment.getPaymentId()));
 			employeeFormBean.setPaymentType(masterPayment.getPaymentType().getPaymentType());
 			employeeFormBean.setPaymentTypeId(String.valueOf(masterPayment.getPaymentType().getPaymentTypeId()));

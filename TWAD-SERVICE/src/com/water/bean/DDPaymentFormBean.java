@@ -29,6 +29,11 @@ public class DDPaymentFormBean {
 	private Long landLineNo;
 	private String emailAddr;
 	private String categoryType;
+	private Integer regionId;
+	private String regionName;
+	private Integer circleId;
+	private String circleName;
+	private Integer divisionId;
 	private String divisionName;
 	private String addrPremSought;
 	private String doorNo;
@@ -50,6 +55,7 @@ public class DDPaymentFormBean {
 	private Integer workType=0;
 	private Integer paymentStatus=0;
 	private Integer upfrontCharges=0;
+	private Integer fullPayment=0;
 	private String mcUser;
 	private String mcSLTCUser;
 	private String mcBoardUser;
@@ -448,6 +454,42 @@ public class DDPaymentFormBean {
 	}
 	public void setBankRefNo(String bankRefNo) {
 		this.bankRefNo = bankRefNo;
+	}
+	public Integer getRegionId() {
+		return regionId;
+	}
+	public void setRegionId(Integer regionId) {
+		this.regionId = regionId;
+	}
+	public String getRegionName() {
+		return regionName;
+	}
+	public void setRegionName(String regionName) {
+		this.regionName = regionName;
+	}
+	public Integer getCircleId() {
+		return circleId;
+	}
+	public void setCircleId(Integer circleId) {
+		this.circleId = circleId;
+	}
+	public String getCircleName() {
+		return circleName;
+	}
+	public void setCircleName(String circleName) {
+		this.circleName = circleName;
+	}
+	public Integer getDivisionId() {
+		return divisionId;
+	}
+	public void setDivisionId(Integer divisionId) {
+		this.divisionId = divisionId;
+	}
+	public Integer getFullPayment() {
+		return fullPayment;
+	}
+	public void setFullPayment(Integer fullPayment) {
+		this.fullPayment = fullPayment;
 	}
 
 }

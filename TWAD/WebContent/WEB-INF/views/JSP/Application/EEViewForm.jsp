@@ -150,12 +150,12 @@ $('#backButton').click(function(){
 
 		<tr>
 			
-			<td><b>Requirement of water in MLD (Million Litres per day)</b></td>
+			<td><b>Requirement of water in KLD (KiloLitres per day)</b></td>
 			<td>:<span id="reqMldId">${list.application.getReqMld()}</span></td>
 			
-			<td><b>Total Amount (Application Fee + GST Amount)</b></td>
-			<td>:<span class="lessWidth"
-				id="isExistConnectionForAlterationId">${list.application.getTotalAmount()}</span></td>
+			<td><b>Full Payment</b></td>
+			<td>:<span class="lessWidth" id="watSevPropId">${list.application.getFullPayment()}</span></td>
+			
 		</tr>
 		
 		
@@ -163,9 +163,11 @@ $('#backButton').click(function(){
 		<tr>
 			<td><b>Application Fee</b></td>
 			<td>:<span class="lessWidth" id="intrPlumStatusId">${list.application.getApplicationFee()}</span></td>
-
-			<td><b>GST Amount</b></td>
-			<td>:<span class="lessWidth" id="watSevPropId">${list.application.getGstAmount()}</span></td>
+			
+            <td><b>Total Amount (Application Fee + GST Amount)</b></td>
+			<td>:<span class="lessWidth"
+				id="isExistConnectionForAlterationId">${list.application.getTotalAmount()}</span></td>
+			
 		</tr>
 		<tr>
 			<td><b>Work Type</b></td>
@@ -210,23 +212,20 @@ $('#backButton').click(function(){
 	<table id="myPaymentTable" width="90%" align="center" style="background-color:#FCFCF4; ">
 	<tr height= "50px">
 	    <th width="20%">Payment Type</th>
-	    <th width="20%">DD No</th>
-	    <th width="20%">DD Date</th>
-	    <th width="20%">DD Amount</th>
-	    <th width="20%">Bank Name</th>
+	    <th width="20%">Total Amount</th>
+	    <th width="20%">Transaction Ref No</th>
+	    <th width="20%">Bank Ref No</th>
 	
 	</tr>
 	
 	 <c:forEach items="${list.application.getPaymentList()}" var="paymentDetail" >
 	 <tr height= "50px">
 	    <td>${paymentDetail.getPaymentType() }</td>
-	     <td>${paymentDetail.getDdNo() }</td>
-	      <td>${paymentDetail.getDdDate() }</td>
 	       <td>${paymentDetail.getPaymentAmount() }</td>
-	        <td>${paymentDetail.getDdBankName() }</td>
+	        <td>${paymentDetail.getTransactionRefNo() }</td>
+	         <td>${paymentDetail.getBankRefNo() }</td>
 	 
 	 </tr>
-			
 	</c:forEach>
 	
 	</table>

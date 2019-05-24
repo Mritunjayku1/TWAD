@@ -487,7 +487,7 @@ $(function(){
 
 <tr><td colspan="2"><hr  style="margin-top: 5px;width: 95%;"/></td></tr>
  
-<tr><td><span><b>Comments:</b></span></td><td>
+<tr><td><span><b>Remarks:</b></span></td><td>
 			<input placeholder="Ex: ABC" type="text" id="paymentDescId" name="paymentDesc" style=""/></td></tr>
 		<tr><td colspan="2" align="center" height="70px">	<input type="button" value="Save" id="paymentSaveBtnId"/> <input type="button" value="Close"  class="closeBtn"/></td></tr>
 	
@@ -678,7 +678,7 @@ $(function(){
                                              <%--  <td class="center"><textarea id="managementComments_${app.getAppId()}" name="managementComments" style="width:100%;height:100%;"></textarea></td> --%>
                                               <td><input type="button" class="paymentClass"
 												name="approveBtn" id="approved_${app.getAppId()}_${app.getCompanyPaymentDtlID()}_${app.getLegCompName()}_${app.getContactPersonName()}"
-												value="Accept Application Fee" /></td>
+												value="Upload Pre-feasibility report" /></td>
                                              <!--  <td class="center"> -->
                                              <%--  <input type="button" class="paymentClass" id="approved_${app.getAppId()}_${app.getCompanyPaymentDtlID()}" name="approvedBtn" style="width: auto;" value="Approved"/> --%>
 											 <%--  <button class="cancelbtn" id="rejected_${app.getAppId()}_${app.getCompanyPaymentDtlID()}" name="rejectedBtn" style="width: auto;">Rejected</button> --%>

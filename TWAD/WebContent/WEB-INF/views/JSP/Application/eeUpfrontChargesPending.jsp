@@ -396,13 +396,13 @@ function validateAddForm() {
 
 <tr><td colspan="2"><hr style="margin: 0px;width: 95%;"/></td></tr>
 
-<tr><td><span><b>Upload Pre feasibility report:</b></span></td><td><input type="file" name="file" accept=".doc,.docx,.dwg,.pdf,.txt,.xlsx,.xls"></td></tr>
+<tr><td><span><b>Upload DPR report:</b></span></td><td><input type="file" name="file" accept=".doc,.docx,.dwg,.pdf,.txt,.xlsx,.xls"></td></tr>
 
 <!-- <tr><td><span><b>Upload consent form:</b></span></td><td><input type="file" name="file" accept=".doc,.docx,.dwg,.pdf,.txt,.xlsx,.xls"></td></tr> -->
 
 <tr><td colspan="2"><hr  style="margin-top: 5px;width: 95%;"/></td></tr>
  
-<tr><td><span><b>Comments:</b></span></td><td>
+<tr><td><span><b>Remarks:</b></span></td><td>
 			<input placeholder="Ex: ABC" type="text" id="paymentDescId" name="paymentDesc" style=""/></td></tr>
 		<tr><td colspan="2" align="center" height="70px">	<input type="button" value="Save" id="paymentSaveBtnId"/> <input type="button" value="Close"  class="closeBtn"/></td></tr>
 	
@@ -565,7 +565,7 @@ function validateAddForm() {
                                              <td>
 											<input type="button"
 												name="approveBtn" id="approved_${app.getAppId()}_${app.getCompanyPaymentDtlID()}"
-												value="Accept Payment..." /></td>
+												value="Upload DPR report" /></td>
                                            
                                         </tr>	 
           									 

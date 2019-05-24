@@ -76,10 +76,7 @@ table.display .td {
 <div></div>
 <script>
 	
-	/* var pendingCount =  parseInt($('#pendingCount').val());
-	var approvedCount = parseInt($('#approvedCount').val());
-	var rejectedCount = parseInt($('#rejectedCount').val());
-	 */
+setTimeout(function(){ 
 	var pendingCount =  parseInt(localStorage.getItem("localStorage_penndingApplication"));
 	var approvedCount = parseInt(localStorage.getItem("localStorage_approvedApplication"));
 	var rejectedCount = parseInt(localStorage.getItem("localStorage_rejectedApplication"));
@@ -99,4 +96,5 @@ table.display .td {
 	];
 
 	fnPlotPieChart(data, "compliantDashboard", "Total Registered Application Count:" + (pendingCount +approvedCount+rejectedCount));
-</script>
+	}, 1000);
+	</script>

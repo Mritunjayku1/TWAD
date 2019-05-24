@@ -382,8 +382,8 @@ catch(Exception e){
 		if(appFormBean.getStatusFlag()=='Y')
 		{
 		final Integer smsType = 1;
-		final String smsTemp="Thank%20you%20for%20Registering%20Water%20Connection%20Your%20CMWSSB%20App%20No%20"+appFormBean.getAppId();
-		
+		//final String smsTemp="Thank%20you%20for%20Registering%20Water%20Connection%20Your%20CMWSSB%20App%20No%20"+appFormBean.getAppId();
+		final String smsTemp="Thank%20you%20for%20Payment%20Water%20Connection%20TWAD%20App%20No%20"+appFormBean.getAppId();
 		final String application_ID = applicationDtls.getAppId();
 		Thread notify = new Thread(new Runnable() {
 			@Override
@@ -667,7 +667,7 @@ catch(Exception e){
 					.add(Restrictions.eq("companyDtl.appId", appFormBean.getAppId()));
 		 List<CompanyDtl> companyDtllist1 = crCom.list();
 		
-		 if(!companyDtllist1.isEmpty()){
+		 if(!companyDtllist1.isEmpty() && companyDtllist1.get(0).getDivision() != null ){
 			 if(companyDtllist1.get(0).getEeStatus().getStatusId()==1 &&  companyDtllist1.get(0).getPaymentStatus()==0)
 			   appFormBean.setPaymentType(1);
 			 if(companyDtllist1.get(0).getEeStatus().getStatusId()==2 &&  companyDtllist1.get(0).getPaymentStatus()==0)

@@ -120,6 +120,8 @@ window.onbeforeunload = function () {
 		$("#pinCodeId").val("600560");
 		$("#isNewConnectionId").val("1");
 		$("#cpinCodeId").val("879787"); 
+		$('#surveyFieldNoId').val("survey");
+		$('#localBodyId').val("Body");
 		
 		
 		$(document).keydown(function (event) {
@@ -534,19 +536,28 @@ window.onbeforeunload = function () {
 
 		$('#registrationbtnId').click(function() {
 			isSubmitBtnClicked=true;
-
+            var isUpload=true; 
+            $('.error').remove();
 							$(".uploadClass").each(function() {
-												$('.error').remove();
-												if (this.files[0] != undefined)
+												
+												if (this.files[0] != undefined){
 													if (this.files[0].size > 5000000) { // 5 * 1000 * 1000 bytes
 														$(this).after('<span class="error"> File Should not be more than 5 MB</span>');
 														$(this).focus();
+														isUpload=false;
 														return false;
 													}
+												}
+												else{
+													$(this).after('<span class="error"> Please upload the file</span>');
+													$(this).focus();
+													isUpload=false;
+												}
+												
 
 							});
 
-							if (validateForm()) {
+							if (isUpload && validateForm()) {
 								if (confirm("Are you sure want to Register ?")) {
 									$('#loading_image').show();
 									var dataString = $('#formId').serialize();
@@ -644,14 +655,20 @@ window.onbeforeunload = function () {
 		flag = true;
 		for (i = 0; i < inputVal.length; i++) {
 			if (inputVal[i].val() == "") {
-				if(inputVal.length != 5)
+				if(inputVal.length != 5){
 				inputVal[i].parent('div').find('label').after('<span class="error"> This field is required. </span>');
-				else{
-					inputVal[i].parent('div').find('input').after('<span class="error"> This field is required. </span>');
-					inputVal[i].parent('div').find('select').after('<span class="error"> This field is required. </span>');
-				}
 				inputVal[i].focus();
 				flag = false;
+				}
+				else{
+					inputVal[i].parent('div').find('#categoryTypeId').after('<span class="error"> This field is required. </span>');
+					inputVal[i].parent('div').find('input').after('<span class="error"> This field is required. </span>');
+					inputVal[i].parent('div').find('#workTypeId').after('<span class="error"> This field is required. </span>');
+					inputVal[i].focus();
+					if(inputVal[i].attr('id') != 'availabilityId')
+					flag = false;
+				}
+				
 			} else if (inputVal[i].attr('id') == 'emailAddrId'
 					&& !emailReg.test(inputVal[i].val())) {
 				inputVal[i]
@@ -710,6 +727,7 @@ window.onbeforeunload = function () {
 			 }
 			 
 			 if (inputVal[i].attr('id') == 'availabilityId' && $('#availabilityId').val() == 1) {
+				
 					if ($('#schemeId').val() == "") {
 						$('#schemeId')
 						.parent('div')
@@ -1064,7 +1082,7 @@ window.onbeforeunload = function () {
                         <td>
                             <div>
                                 <label><b>Availability of water:</b></label>
-                                <select class="classCategory" id="availabilityId" name="availability" style="margin-left: 35px;">
+                                <select class="classCategory" id="availabilityId" name="availability" style="margin-left: 43px;">
                                     <option value="">--Select--</option>
                                     <option value="1">From TWAD CWSS</option>
                                     <option value="2">Need Dedicated Scheme</option>
@@ -1077,7 +1095,7 @@ window.onbeforeunload = function () {
                         <td>
                             <div>
                                 <label><b>Scheme:</b></label> 
-                                <select class="classCategory" id="schemeId" name="scheme" style="margin-left: 112px;" title="Scheme with Quantity">
+                                <select class="classCategory" id="schemeId" name="scheme" style="margin-left: 122px;" title="Scheme with Quantity">
                                     <option value="">--Select--</option>
                                    
                                 </select>
@@ -1130,19 +1148,19 @@ window.onbeforeunload = function () {
                     <tr class="tab3">
                         <td><b>Location sketch showing the points of requirement <font
 								style="color: rgb(128, 128, 128); font-size: 12px;">(Scale
-									not less than 1:400,.dwg file, 5 MB)</font>:
+									not less than 1:400,.dwg file, 5 MB)</font>:<span style="color: red;">*</span>
 						</b></td>
                         <td>
-                            <input type="file" class="uploadClass" name="file" accept=".dwg" />
+                            <input type="file" class="uploadClass" name="file"  />
                         </td>
                     </tr>
                     <tr class="tab3">
                         <td><b>Google map with Lat/Long  <font
 								style="color: rgb(128, 128, 128); font-size: 12px;">(.dwg
-									file, 5 MB)</font>:
+									file, 5 MB)</font>:<span style="color: red;">*</span>
 						</b></td>
                         <td>
-                            <input type="file" class="uploadClass" name="file" accept=".dwg" />
+                            <input type="file" class="uploadClass" name="file" />
                         </td>
                     </tr>
                    
@@ -1151,7 +1169,7 @@ window.onbeforeunload = function () {
 								style="color: rgb(128, 128, 128); font-size: 12px;">(sale
 									deed/ lease deed/ rental deed)</font> self-attested by the applicant
 								<font style="color: rgb(128, 128, 128); font-size: 12px;">(
-									PDF file, 5 MB)</font>:
+									PDF file, 5 MB)</font>:<span style="color: red;">*</span>
 						</b></td>
                         <td width="50%">
                             <input type="file" class="uploadClass" name="file" accept=".pdf" />

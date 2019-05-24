@@ -273,7 +273,7 @@ $(document).ready(function(){
                                 <input placeholder="Ex: 1234567891" type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' id="mobileNumId" name="mobileNum" maxlength="10" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Mobile No." />
                            
  </td></tr> --%>
-<tr><td class="tdPadding" width="50%"><b>Payment Type:</b><span style="color:red;">*</span></td><td>
+<tr><td class="tdPadding" width="50%"><b>Payment Type:</b></td><td>
 <select id="paymentTypeId" name="paymentType">
                                     
                                         <option value="1">Application Fee</option>
@@ -298,7 +298,7 @@ $(document).ready(function(){
   <div class="input-group">
                                         <span class="input-group-addon"><img
 											src="library/img/RupeeImage.png" /></span>
-                                        <input type="text" placeholder ="DD Amount" title="Please enter DD Amount" id="paymentDDAmountId" name="paymentAmount" readonly style="width: 245px;" />
+                                        <input type="text" placeholder ="Total Amount" title="Please enter DD Amount" id="paymentDDAmountId" name="paymentAmount" readonly style="width: 245px;" />
                                     </div>
  
  

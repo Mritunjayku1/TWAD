@@ -369,6 +369,7 @@ $('#deletePayment').click(function(){
                                            <!--  <th style="color:black !important"></th> -->
                                             <th style="color:black !important"><input type="checkbox" id="all" style="width:15px;"/></th>
                                             <th style="color:black !important"><b> #</b></th>
+                                             <th style="color:black !important"><b> App Ref</b></th>
                                              <th style="color:black !important"><b> Payment Type</b></th>
                                             <th style="color:black !important"><b>Payment Amount</b></th>
                                              <th style="color:black !important"><b>GST Percent</b></th>
@@ -390,6 +391,7 @@ $('#deletePayment').click(function(){
           							
                                             <td><input type="checkbox" id="${app.getPaymentId()}" style="width:15px;"/></td>
                                             <td>${count.count}</td>
+                                             <td>${app.getAppId()}</td>
                                              <td id="${app.getPaymentTypeId()}">${app.getPaymentType()}</td>
                                              <td>${app.getPaymentAmount()}</td>
                                               <td>${app.getGstPercent()}</td>

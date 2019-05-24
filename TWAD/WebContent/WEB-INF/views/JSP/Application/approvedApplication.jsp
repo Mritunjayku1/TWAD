@@ -40,15 +40,41 @@ height:25px !important;
 <script type="text/javascript">
 
 $(function(){
-	 $('input[name="editBtn"]').click(function(){
+	$('input[name="approvedBtn"]').click(function(){
 		var approvedAppRef = $(this).attr('id');
 		var appId = approvedAppRef.split("_");
+		var managementComments=$('#managementComments_'+appId[1]).val();
+		var regionId=$("#regionSearch_"+appId[1]+" option:selected").val();
+		if(regionId == null || regionId=='')
+		{
+		alert("Please select Region !")
+		return false;
+		}
+		var circleId= $("#circleSearch_"+appId[1]+" option:selected").val();
+		if(circleId == null || circleId=='')
+		{
+		alert("Please select Circle !")
+		return false;
+		}
+		var divisionId= $("#divisionSearch_"+appId[1]+" option:selected").val();
+		if(divisionId == null || divisionId=='')
+		{
+		alert("Please select Division !")
+		return false;
+		}
 		
-		if(confirm("Are you sure want to change Division ? ")){
+		
+		if(confirm("Are you sure want to Reassign ? ")){
 		$.ajax({
 			type:"POST",
-			url:"approvedApplicationEdit.do",
-			data:{'appId':appId[1]},
+			url:"registeredApplicationApproved.do",
+			data:{
+				'appId':appId[1],
+				'managementComments':managementComments,
+				'region':regionId,
+				'circle':circleId,
+				'division':divisionId
+				},
 			success:function(response){
 				alert(response);
 				window.location.reload();
@@ -58,6 +84,132 @@ $(function(){
 		}
 		
 	});
+	$('input[name="rejectedBtn"]').click(function(){
+		var approvedAppRef = $(this).attr('id');
+		var appId = approvedAppRef.split("_");
+		var managementComments=$('#managementComments_'+appId[1]).val();
+		if(managementComments == null || managementComments=='')
+		{
+		alert("Please enter the Comments !")
+		return false;
+		}
+		if(confirm("Are you sure want to Reject ? ")){
+		$.ajax({
+			type:"POST",
+			url:"registeredApplicationRejected.do",
+			data:{'appId':appId[1],'managementComments':managementComments},
+			success:function(response){
+				alert(response);
+				window.location.reload();
+				
+			}
+		});
+		}
+		
+	});
+	   var acList = "";
+	   
+	   var searchId = "";
+	 
+	  
+	                     
+	                    	    	  $.ajax({
+	                  					type: "GET",
+	                  					async:false,
+	                  					url: "library/Region.json",
+	                  					success: function (response) {	
+        									var region = response;
+	         									var option = '<option value="">--Select--</option>';
+	         									if (region != undefined)
+	         										for (var i = 0; i < region.length; i++) {
+	         											
+	         											option = option + '<option value="' + region[i].id + '">' +region[i].value +'</option>';
+	         										}
+	         									$('.regionSearchClass').find('option').remove();
+	         									$('.regionSearchClass').append(option);
+	         									
+	         										}
+	                  	    	  
+	                  	    	  });
+	                    	       
+	                    	    	  $('.regionSearchClass').change(function () {
+	                    	    		  var searchIdArr = $(this).attr("id").split("_");
+	                    	  	    	  searchId = searchIdArr[1];
+	                    	    	  
+	                    	    		  $.ajax({
+         	                  					type: "GET",
+         	                  					async:false,
+         	                  					url: "library/Circle.json",
+         	                  					success: function (response)  {
+	         	                  						
+ 	         	                  					var regionSelectedValue =$("#regionSearch_"+searchId+" option:selected").val();
+ 	         									var circle = response[regionSelectedValue];
+ 	         									var option = '<option value="">--Select--</option>';
+ 	         									if (circle != undefined)
+ 	         										for (var i = 0; i < circle.length; i++) {
+
+ 	         										option = option + '<option value="' + circle[i].id + '">' +circle[i].value +'</option>';
+ 	         											
+ 	         										}
+ 	         									$('#circleSearch_'+searchId).find('option').remove();
+ 	         									$('#circleSearch_'+searchId).append(option);
+ 	         	                  					}
+ 	         	                  	    	  
+         	                  	    	  
+         	                  	    	  });
+         	                    	        
+	                    	    	  
+	                    	          });
+	                      
+	                      
+	                      
+	               	                     
+	               	                      $('.circleSearchClass').change(function () { 
+	               	                    	  
+	               	                    	  var searchIdArr = $(this).attr("id").split("_");
+		                    	  	    	  searchId = searchIdArr[1];
+		                    	    	  
+	               	                    	  $.ajax({
+	               	                      
+	         	                  					type: "GET",
+   	         	                  					async:false,
+   	         	                  					url: "library/Division.json",
+   	         	                  					success: function (response) {
+   	         	                  						
+   	         	                  					var circleSelectedValue =$("#circleSearch_"+searchId+" option:selected").val();
+   	         									var division = response[circleSelectedValue];
+   	         									var option = '<option value="">--Select--</option>';
+   	         									if (division != undefined)
+   	         										for (var i = 0; i < division.length; i++) {
+   	         										option = option + '<option value="' + division[i].id + '">' +division[i].value +'</option>';
+   	         										}
+   	         									$('#divisionSearch_'+searchId).find('option').remove();
+   	         									$('#divisionSearch_'+searchId).append(option);
+   	         	                  					}
+   	         	                  	    	  
+   	         	                  	    	  });
+	               	                      
+	               	                    	});
+	               	
+	               	                      
+	               	  
+	               	                      
+	               	                      $('#dataTables-example .gradeX').find('.regionSearchClass').each(function(){
+	               	                    	
+		                    	  	    	   $(this).val($(this).attr("name")).trigger('change');
+		                    	  	    	  
+		                    	  	    	  var circleSearchClass = $(this).parents('tr').find('.circleSearchClass');
+		                    	  	    	  
+		                    	  	    	circleSearchClass.val(circleSearchClass.attr("name")).trigger('change');
+		                    	  	    	
+		                    	  	    	 var divisionSearchClass = $(this).parents('tr').find('.divisionSearchClass');
+		                    	  	    	 
+		                    	  	    	divisionSearchClass.val(divisionSearchClass.attr("name")).trigger('change');
+	               	                    	  
+	               	                      });
+	               	                      
+	               	         	              
+	                      
 });
 </script>
 <table class='table-bordered table table-striped display'
@@ -80,7 +232,7 @@ $(function(){
 
 
                 <div class="row">
-                <div class="col-lg-12">
+                <div>
                     <div class="panel panel-default">
                         
                         <div class="panel-body">
@@ -91,12 +243,15 @@ $(function(){
                                            <!--  <th style="color:black !important"></th> -->
                                             <th style="color:black !important"><b>App Ref#</b></th>
                                             <th style="color:black !important"><b> Name of Company</b></th>
-                                           <!--  <th style="color:black !important"><b>Category Type</b></th>
-                                            <th style="color:black !important"><b>Correspondence Address</b></th> -->
-                                             <th style="color:black !important"><b>Registered Date</b></th>
-                                              <th style="color:black !important"><b>Division Name</b></th>
-                                             <th></th>
-                                             
+                                            <th style="color:black !important"><b> District</b></th>
+                                            <th style="color:black !important"><b>Taluk</b></th>
+                                            <th style="color:black !important"><b> Village</b></th>
+                                            <th style="color:black !important"><b>Region</b></th>
+                                            <th style="color:black !important"><b>Circle</b></th>
+                                            <th style="color:black !important"><b>Division</b></th>
+                                            <th style="color:black !important"><b>Registered Date</b></th>
+                                            <th style="color:black !important"><b>Remarks</b></th>
+                                            <th></th>
                                         
                                         </tr>
                                     </thead>
@@ -110,16 +265,33 @@ $(function(){
           								
           							<td > <a href="paymentViewForm.do?appId=${app.getAppId()}" style="color: rgb(128,128,128)">${app.getAppId()}</a></td>
                                             <td>${app.getLegCompName()}</td>
-                                            <%--  <td>${app.getCategoryType()}</td>
-                                            <td class="center">${app.getCdoorNo()} ${app.getCplotNo()} ${app.getCstreetName()} ${app.getClocation()} ${app.getCpinCode()}</td>
-                                           --%>
-                                             <td class="center">${app.getCreateTs()}</td>
-                                              <td class="center">${app.getDivisionName()}</td>
+                                             <td>${app.getDistrict()}</td>
+                                              <td>${app.getTaluk()}</td>
+                                               <td>${app.getVillage()}</td>
+                                           
+                                            
                                              
                                               <td class="center">
-                                              <input type="button" class="paymentClass" id="edit_${app.getAppId()}" name="editBtn" style="width: auto;" value="Edit"/>
+                                             
+                                               <select  style="width:90px;" class="regionSearchClass" name="${app.getRegionId()}" id="regionSearch_${app.getAppId()}"></select>
+                                              </td>
+                                              
+                                               <td class="center">
+                                              
+                                               <select style="width:90px;" class="circleSearchClass" name="${app.getCircleId()}" id="circleSearch_${app.getAppId()}"></select>
+                                              </td>
+                                              
+                                               <td class="center">
+                                             
+                                               <select style="width:90px;" class="divisionSearchClass" name="${app.getDivisionId()}" id="divisionSearch_${app.getAppId()}"> </select>
                                               </td>
                                              
+                                              <td class="center">${app.getCreateTs()}</td>
+                                              <td class="center"><textarea id="managementComments_${app.getAppId()}" name="managementComments" style="width:100%;height:100%;">${app.getManagementComments()}</textarea></td>
+                                              <td class="center">
+                                              <input type="button" class="paymentClass" id="approved_${app.getAppId()}" name="approvedBtn" style="width: auto;" value="Reassign"/>
+											 <%--  <input type="button" class="cancelbtn" id="rejected_${app.getAppId()}" name="rejectedBtn" style="width: auto;" value="Reject"/> --%>
+											  </td>
                                            
                                         </tr>	 
           									 

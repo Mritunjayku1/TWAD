@@ -1495,6 +1495,8 @@ public class DashboardDaoImpl implements DashboardDao {
 					.createAlias("companyDtl.taluk", "taluk")
 					.createAlias("companyDtl.village", "village")
 					.createAlias("companyDtl.division","division",JoinType.LEFT.ordinal())
+					.createAlias("companyDtl.region","region")
+					.createAlias("companyDtl.circle","circle")
 					.setProjection(Projections.projectionList()
 					.add(Projections.property("companyDtl.appId"),"appId")
 					.add(Projections.property("companyDtl.contactPersonName"),"contactPersonName")
@@ -1510,6 +1512,13 @@ public class DashboardDaoImpl implements DashboardDao {
 					.add(Projections.property("companyDtl.landLineNo"),"landLineNo")
 					.add(Projections.property("companyDtl.emailAddr"),"emailAddr")
 					.add(Projections.property("categoryType.categoryName"),"categoryType")
+					.add(Projections.property("region.regionId"),"regionId")
+					.add(Projections.property("region.regionName"),"regionName")
+					
+					.add(Projections.property("circle.circleId"),"circleId")
+					.add(Projections.property("circle.circleName"),"circleName")
+					
+					.add(Projections.property("division.divisionId"),"divisionId")
 					.add(Projections.property("division.divisionName"),"divisionName")
 					.add(Projections.property("companyDtl.addrPremSought"),"addrPremSought")
 					.add(Projections.property("companyDtl.doorNo"),"doorNo")
@@ -1565,6 +1574,8 @@ public class DashboardDaoImpl implements DashboardDao {
 					.createAlias("companyDtl.taluk", "taluk")
 					.createAlias("companyDtl.village", "village")
 					.createAlias("companyDtl.division","division",JoinType.LEFT.ordinal())
+					.createAlias("companyDtl.region","region")
+					.createAlias("companyDtl.circle","circle")
 					.setProjection(Projections.projectionList()
 					.add(Projections.property("companyDtl.appId"),"appId")
 					.add(Projections.property("companyDtl.contactPersonName"),"contactPersonName")
@@ -1580,6 +1591,13 @@ public class DashboardDaoImpl implements DashboardDao {
 					.add(Projections.property("companyDtl.landLineNo"),"landLineNo")
 					.add(Projections.property("companyDtl.emailAddr"),"emailAddr")
 					.add(Projections.property("categoryType.categoryName"),"categoryType")
+					.add(Projections.property("region.regionId"),"regionId")
+					.add(Projections.property("region.regionName"),"regionName")
+					
+					.add(Projections.property("circle.circleId"),"circleId")
+					.add(Projections.property("circle.circleName"),"circleName")
+					
+					.add(Projections.property("division.divisionId"),"divisionId")
 					.add(Projections.property("division.divisionName"),"divisionName")
 					.add(Projections.property("companyDtl.addrPremSought"),"addrPremSought")
 					.add(Projections.property("companyDtl.doorNo"),"doorNo")
@@ -1910,7 +1928,33 @@ public class DashboardDaoImpl implements DashboardDao {
 	}
 
 	
-	public List<CompanyPaymentDtl> getpaymentList(String appId) {
+	public List<MasterPayment> getManagementSetpaymentList(String appId) {
+		// TODO Auto-generated method stub
+
+		
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+	List<MasterPayment> appDetails = new ArrayList<>();
+		try {
+			
+           Criteria cr = session.createCriteria(MasterPayment.class,"masterPayment")
+        		   .createCriteria("masterPayment.appId","companyDtl",JoinType.LEFT.ordinal())
+           .add(Restrictions.or(Restrictions.eq("companyDtl.appId", appId),Restrictions.isNull("companyDtl.appId")));
+			
+			appDetails=cr.list();
+			
+		
+				} catch (Exception e) {
+			// TODO: handle exception
+					e.printStackTrace();
+		}
+		return appDetails;
+	}
+	
+	
+	
+	public List<CompanyPaymentDtl> getUserPaymentList(String appId) {
 		// TODO Auto-generated method stub
 
 		
@@ -1986,7 +2030,7 @@ public class DashboardDaoImpl implements DashboardDao {
 		
 		
 		SQLQuery query = session.createSQLQuery(sqlQreyString.toString());
-		query.setParameter("divisionId", companyDtlBean.getDivision());
+		query.setParameter("divisionId",Integer.parseInt(companyDtlBean.getDivision()));
 		dashBoardCount = query.list();
 		return dashBoardCount;
 

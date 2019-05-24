@@ -20,7 +20,7 @@
     font-size: 20px;
     color: white;
     margin-top: -32px;
-    margin-left: 195px;
+    margin-left: 90px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 /* #menu3{
@@ -74,7 +74,7 @@ $(function(){
 	
 	
 	$('#paymentSaveBtnId').click(function(){
-		  $("#paymentSaveBtnId").prop("disabled", true);
+		 
 		  
 		  var regionId=$("#regionSearch option:selected").val();
 			if(regionId == null || regionId=='')
@@ -99,6 +99,7 @@ $(function(){
 		  
 		  
    		 if(confirm("Are you sure want to change Division ? ")){
+   			 $("#paymentSaveBtnId").prop("disabled", true);
    			$.ajax({
    				type:"POST",
    				url:"transferApplicationSave.do",
@@ -186,7 +187,7 @@ $(function(){
 			var appId = transferAppRef.split("_");
 			$('#appId').val(appId[1]);
 			$(".ui-dialog-content").dialog("close");
-			$( "#addDialog" ).dialog({ 'width':'600px','modal':'true'});
+			$( "#addDialog" ).dialog({ 'width':'400px','modal':'true'});
 			$('#appIdSpan').text(appId[1]);
 			
 			$.ajax({
@@ -227,39 +228,32 @@ $(function(){
 <img class="imgClose" src="library/img/Close_SMS.png"
 		style="width: 40px; border-width: 0px; float: right; margin-top: -11px; margin-right: -5px; cursor: pointer;">
 	<h2 class="bg_heading">Transfer Division</h2>
-	<table id="paymentTable" style="margin-left: 30px;margin-top: 20px;">
-
- 
-                                              
-                                              
-                                              
-                                              
+	<table id="paymentTable" style="margin-left: 30px;margin-top: 20px;height: 300px;">
 
 <tr><td><span><b>App Ref#:</b></span></td><td class="center">
                                              
-                                              <span id="appIdSpan"></span>
+                                              <span style="font-weight: bold;" id="appIdSpan"></span><br/>
                                               </td></tr>
 
 <tr><td><span><b>Region:</b></span></td><td class="center">
                                              
-                                               <select  style="width:90px;" class="regionSearchClass" id="regionSearch"></select>
+                                               <select  style="width:200px;" class="regionSearchClass" id="regionSearch"></select>
                                               </td></tr>
 
 
 <tr><td><span><b>Circle:</b></span></td> <td class="center">
                                               
-                                               <select style="width:90px;" class="circleSearchClass" id="circleSearch"></select>
+                                               <select style="width:200px;" class="circleSearchClass" id="circleSearch"></select>
                                               </td></tr>
 
 <tr><td><span><b>Division:</b></span></td> <td class="center">
                                              
-                                               <select style="width:90px;" class="divisionSearchClass" id="divisionSearch"> </select>
+                                               <select style="width:200px;" class="divisionSearchClass" id="divisionSearch"> </select>
                                               </td>
                                              </tr>
-<tr><td colspan="2"><hr  style="margin-top: 5px;width: 95%;"/></td></tr>
  
-<tr><td><span><b>Comments:</b></span></td><td>
-			<input placeholder="Ex: ABC" type="text" id="paymentDescId" name="paymentDesc" style=""/></td></tr>
+<tr><td><span><b>Remarks:</b></span></td><td>
+			<textarea placeholder="Ex: ABC"  id="paymentDescId" name="paymentDesc" style="width: 200px;height: 35px;"></textarea></td></tr>
 		<tr><td colspan="2" align="center" height="70px">	<input type="button" value="Save" id="paymentSaveBtnId"/> <input type="button" value="Close"  class="closeBtn"/></td></tr>
 	
 	
@@ -302,12 +296,15 @@ $(function(){
                                            <!--  <th style="color:black !important"></th> -->
                                             <th style="color:black !important"><b>App Ref#</b></th>
                                             <th style="color:black !important"><b> Name of Company</b></th>
-                                           <!--  <th style="color:black !important"><b>Category Type</b></th>
-                                            <th style="color:black !important"><b>Correspondence Address</b></th> -->
-                                             <th style="color:black !important"><b>Registered Date</b></th>
-                                              <th style="color:black !important"><b>Division Name</b></th>
-                                             <th></th>
-                                             
+                                            <th style="color:black !important"><b> District</b></th>
+                                            <th style="color:black !important"><b>Taluk</b></th>
+                                            <th style="color:black !important"><b> Village</b></th>
+                                            <th style="color:black !important"><b>Region</b></th>
+                                            <th style="color:black !important"><b>Circle</b></th>
+                                            <th style="color:black !important"><b>Division</b></th>
+                                            <th style="color:black !important"><b>Registered Date</b></th>
+                                           <!--  <th style="color:black !important"><b>Remarks</b></th> -->
+                                            <th></th>
                                         
                                         </tr>
                                     </thead>
@@ -321,11 +318,16 @@ $(function(){
           								
           							<td > <a href="paymentViewForm.do?appId=${app.getAppId()}" style="color: rgb(128,128,128)">${app.getAppId()}</a></td>
                                             <td>${app.getLegCompName()}</td>
-                                            <%--  <td>${app.getCategoryType()}</td>
-                                            <td class="center">${app.getCdoorNo()} ${app.getCplotNo()} ${app.getCstreetName()} ${app.getClocation()} ${app.getCpinCode()}</td>
-                                           --%>
-                                             <td class="center">${app.getCreateTs()}</td>
-                                              <td class="center">${app.getDivisionName()}</td>
+                                             <td>${app.getDistrict()}</td>
+                                              <td>${app.getTaluk()}</td>
+                                               <td>${app.getVillage()}</td>
+                                               <td class="center">${app.getRegionName()}</td>
+                                                <td class="center">${app.getCircleName()}</td>
+                                               <td class="center">${app.getDivisionName()}</td>
+                                             
+                                              <td class="center">${app.getCreateTs()}</td>
+                            
+                                             
                                              
                                               <td class="center">
                                               <input type="button" class="paymentClass" id="transfer_${app.getAppId()}" name="transferBtn" style="width: auto;" value="Transfer"/>
