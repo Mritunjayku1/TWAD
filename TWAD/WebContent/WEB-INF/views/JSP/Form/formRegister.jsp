@@ -108,7 +108,7 @@ window.onbeforeunload = function () {
 	$(document).ready(function() {
 		
 		
-		
+		/* 
 		 $("#legCompNameId").val("Jay Test");
 		$("#correspondenceAddrId").val("");
 		$("#contactPersonNameId").val("Jay");
@@ -122,7 +122,7 @@ window.onbeforeunload = function () {
 		$("#cpinCodeId").val("879787"); 
 		$('#surveyFieldNoId').val("survey");
 		$('#localBodyId').val("Body");
-		
+		 */
 		
 		$(document).keydown(function (event) {
 		    if (event.keyCode == 123) { // Prevent F12
@@ -864,7 +864,7 @@ window.onbeforeunload = function () {
                             <div>
                                 <label><b>Mobile Number:</b></label> <span style="color: red;">*</span>
                                 <br />
-                                <input  type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57 && event.charCode = 43' id="mobileNumId" name="mobileNum" maxlength="13" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Mobile No." />
+                                <input placeholder="+91..........."  type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57 && event.charCode = 43' id="mobileNumId" name="mobileNum" maxlength="13" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Mobile No." />
                             </div>
                             <br />
                         </td>
