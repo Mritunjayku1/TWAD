@@ -2491,9 +2491,14 @@ CompanyDtlBean companyDtlBean = new CompanyDtlBean();
 
 		HttpEntity<?> entity = new HttpEntity(headers);
 
-		ResponseEntity<String> out1 = restTemplate.exchange(
+		/*ResponseEntity<String> out1 = restTemplate.exchange(
 				WaterDashboardService + "getVillageDtl",
+				HttpMethod.POST, entity, String.class);*/
+		ResponseEntity<String> out1 = restTemplate.exchange(
+				WaterDashboardService + "getDistrictDtl",
 				HttpMethod.POST, entity, String.class);
+		
+		
 
 		JSONArray jsonArray1 = new JSONArray(out1.getBody().toString());
 
@@ -2502,10 +2507,10 @@ CompanyDtlBean companyDtlBean = new CompanyDtlBean();
 
 		Map<String,String> villageMap = new LinkedHashMap<>();
 		for (int i = 0; i < jsonArray1.length(); i++) {
-			VillageFormBean villageFormBean = gson1.fromJson(
-					jsonArray1.getString(i), VillageFormBean.class);
-			if(!villageMap.containsKey(String.valueOf(villageFormBean.getVillageId()))){
-				villageMap.put(String.valueOf(villageFormBean.getVillageId()), villageFormBean.getVillageName());
+			DistrictFormBean villageFormBean = gson1.fromJson(
+					jsonArray1.getString(i), DistrictFormBean.class);
+			if(!villageMap.containsKey(String.valueOf(villageFormBean.getDistrictId()))){
+				villageMap.put(String.valueOf(villageFormBean.getDistrictId()), villageFormBean.getDistrictName());
 				}
 		}
 		
@@ -2532,7 +2537,7 @@ CompanyDtlBean companyDtlBean = new CompanyDtlBean();
 		model.put("villageSchemeDtl", villageSchemeFormBeanList);
 		model.put("villageMap", villageMap);
 
-		return new ModelAndView("villageSchemeManagement", "list", model);
+		return new ModelAndView("villageSchemeManagement", "list", model);//Maha
 	}
 
 	

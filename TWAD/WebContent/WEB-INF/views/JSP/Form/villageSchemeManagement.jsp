@@ -456,7 +456,7 @@ $('#deleteScheme').click(function(){
                                            <!--  <th style="color:black !important"></th> -->
                                             <th style="color:black !important"><input type="checkbox" id="all" style="width:15px;"/></th>
                                             <th style="color:black !important"><b> #</b></th>
-                                            <th style="color:black !important"><b>Village Name</b></th>
+                                            <th style="color:black !important"><b>District Name</b></th>
                                             <th style="color:black !important"><b>Scheme Name</b></th>
                                              <th style="color:black !important"><b>Quantity</b></th>
                                              <!-- <th style="color:black !important"><b>Address</b></th>
@@ -551,7 +551,7 @@ $('#deleteScheme').click(function(){
 		<h2 class="bg_heading">Add New Scheme</h2>
 
 
-<span><b>Select Village Name:</b></span><span style="color: red;">*</span>
+<span><b>Select District Name:</b></span><span style="color: red;">*</span>
 <select id="schemeVillageId" name="schemeVillageName" style="margin-left: 15px;">
 <option value="">--Select Village--</option>
 <c:forEach var="var" items="${list.villageMap}">

@@ -3018,6 +3018,36 @@ public String editVillage(TalukVillageFormBean talukVillageFormBean ){
 		}
 			return "Village deleted Successfully";
 		}
+	/*public List<TalukVillageFormBean> getVillageDtl(){
+		Session session = sessionFactory.openSession();
+		Criteria cr = session.createCriteria(MasterVillage.class,"app")
+				.setProjection(Projections.projectionList()
+			            .add(Projections.property("taluk.talukName"),"talukName")
+			            .add(Projections.property("app.villageName"),"villageName")  
+			            
+			            
+			            .add(Projections.property("taluk.talukId"),"talukId")  
+			            .add(Projections.property("app.villageId"),"villageId"))
+			
+		.setResultTransformer(Transformers.aliasToBean(TalukVillageFormBean.class));
+			return cr.list();
+		}
+	*/
+	/*public List<DistrictFormBean> getVillageDtl(){
+		Session session = sessionFactory.openSession();
+		Criteria cr = session.createCriteria(MasterDistrict.class,"app")
+				.createCriteria("app.districtId","taluk")
+				.setProjection(Projections.projectionList()
+			            .add(Projections.property("taluk.districtName"),"districtName")
+			          .add(Projections.property("app.villageName"),"villageName")  )
+			            
+			            
+			         //   .add(Projections.property("taluk.talukId"),"talukId")  
+			         //  .add(Projections.property("app.villageId"),"villageId"))
+			
+		.setResultTransformer(Transformers.aliasToBean(DistrictFormBean.class));
+			return cr.list();
+		}*/
 	public List<TalukVillageFormBean> getVillageDtl(){
 		Session session = sessionFactory.openSession();
 		Criteria cr = session.createCriteria(MasterVillage.class,"app")
@@ -3033,9 +3063,49 @@ public String editVillage(TalukVillageFormBean talukVillageFormBean ){
 		.setResultTransformer(Transformers.aliasToBean(TalukVillageFormBean.class));
 			return cr.list();
 		}
+	public List<DistrictFormBean> getVillageDtlold(){
+		Session session = sessionFactory.openSession();
+		Criteria cr = session.createCriteria(MasterDistrict.class,"app")
+				.createCriteria("app.districtId","taluk")
+				.setProjection(Projections.projectionList()
+			            .add(Projections.property("taluk.districtName"),"districtName"))
+			          //  .add(Projections.property("app.villageName"),"villageName")  
+			            
+			            
+			          //  .add(Projections.property("taluk.talukId"),"talukId")  
+			          //  .add(Projections.property("app.villageId"),"villageId"))
+			
+		.setResultTransformer(Transformers.aliasToBean(DistrictFormBean.class));
+			return cr.list();
+		}
 	
 	
 
+public String addSchemeold(VillageSchemeFormBean districtSchemeFormBean ){
+	
+	String[] talukArray = districtSchemeFormBean.getSchemeName().split(",");
+	String[] schemeQtyArray = districtSchemeFormBean.getQuantity().split(",");
+	
+	for(int i=0;i<talukArray.length;i++){
+	
+	Session session2 = sessionFactory.openSession();
+	Transaction tx2 =  session2.beginTransaction();
+	
+	MasterScheme masterScheme = new MasterScheme();
+	//masterScheme.setVillageId((MasterVillage)session2.get(MasterVillage.class,Integer.parseInt(districtSchemeFormBean.getVillageSchemeId())));
+	
+	masterScheme.setSchemeName(talukArray[i]);
+	masterScheme.setQuantity(schemeQtyArray[i]);
+	masterScheme.setUpdateTs(new Date());
+	masterScheme.setCreateTs(new Date());
+	masterScheme.setUpdateUserId("Administrator");
+	masterScheme.setCreateUserId("Administrator");
+	
+	session2.save(masterScheme);
+	tx2.commit();
+	}
+		return "Scheme Added Successfully";
+	}
 public String addScheme(VillageSchemeFormBean districtSchemeFormBean ){
 	
 	String[] talukArray = districtSchemeFormBean.getSchemeName().split(",");
@@ -3047,7 +3117,8 @@ public String addScheme(VillageSchemeFormBean districtSchemeFormBean ){
 	Transaction tx2 =  session2.beginTransaction();
 	
 	MasterScheme masterScheme = new MasterScheme();
-	masterScheme.setVillageId((MasterVillage)session2.get(MasterVillage.class,Integer.parseInt(districtSchemeFormBean.getVillageSchemeId())));
+	//masterScheme.setVillageId((MasterVillage)session2.get(MasterDistrict.class,Integer.parseInt(districtSchemeFormBean.getVillageSchemeId())));
+	masterScheme.setDistrictId((MasterDistrict)session2.get(MasterDistrict.class,Integer.parseInt(districtSchemeFormBean.getVillageSchemeId())));
 	masterScheme.setSchemeName(talukArray[i]);
 	masterScheme.setQuantity(schemeQtyArray[i]);
 	masterScheme.setUpdateTs(new Date());
@@ -3099,6 +3170,20 @@ public String editScheme(VillageSchemeFormBean districtSchemeFormBean ){
 			return "Scheme deleted Successfully";
 		}
 	public List<VillageSchemeFormBean> getSchemeDtl(){
+		Session session = sessionFactory.openSession();
+		Criteria cr = session.createCriteria(MasterScheme.class,"app")
+				.createCriteria("app.districtId","village")
+				.setProjection(Projections.projectionList()
+			            .add(Projections.property("village.districtName"),"villageName")
+			            .add(Projections.property("app.schemeName"),"schemeName")  
+			            .add(Projections.property("app.quantity"),"quantity") 
+			           // .add(Projections.property("village.villageId"),"villageId")  
+			            .add(Projections.property("app.schemeId"),"schemeId"))
+			
+		.setResultTransformer(Transformers.aliasToBean(VillageSchemeFormBean.class));
+			return cr.list();
+		}
+	public List<VillageSchemeFormBean> getSchemeDtlold(){
 		Session session = sessionFactory.openSession();
 		Criteria cr = session.createCriteria(MasterScheme.class,"app")
 				.createCriteria("app.villageId","village")

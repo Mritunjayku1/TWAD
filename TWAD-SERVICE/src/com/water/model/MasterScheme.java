@@ -41,9 +41,13 @@ public class MasterScheme implements Serializable{
 	
 	
 
-	@ManyToOne(targetEntity = MasterVillage.class, fetch = FetchType.LAZY)
+	/*@ManyToOne(targetEntity = MasterVillage.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "VILLAGE_ID", nullable = true)
-	private MasterVillage villageId;
+	private MasterVillage villageId;*/
+	
+	@ManyToOne(targetEntity = MasterDistrict.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "DISTRICT_ID", nullable = true)
+	private MasterDistrict districtId;
 	
 	
 	
@@ -131,13 +135,23 @@ public class MasterScheme implements Serializable{
 	}
 
 
-	public MasterVillage getVillageId() {
+	/*public MasterVillage getVillageId() {
 		return villageId;
 	}
 
 
 	public void setVillageId(MasterVillage villageId) {
 		this.villageId = villageId;
+	}
+*/
+
+	public MasterDistrict getDistrictId() {
+		return districtId;
+	}
+
+
+	public void setDistrictId(MasterDistrict districtId) {
+		this.districtId = districtId;
 	}
 
 

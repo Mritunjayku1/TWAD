@@ -250,6 +250,8 @@ window.onbeforeunload = function () {
 
 							}
 						});
+              
+            
 				});
 
 		$('#talukId').change(function () {
@@ -276,19 +278,25 @@ window.onbeforeunload = function () {
 
 		});
 		
-		$('#villageId').change(function () {
+		$('#districtId').change(function () {
             $.ajax({
 						type: "GET",
 						url: "library/Scheme.json",
 						success: function (response) {
-							var villageSelectedValue = $('#villageId option:selected').val();
+							alert("11111"+JSON.stringify(response));
+							var villageSelectedValue = $('#districtId option:selected').val();
+							alert("villageSelectedValue:"+villageSelectedValue);
+							
 							var scheme = response[villageSelectedValue];
-							var option = '<option value="">--Select Scheme--</option>';
+							alert("scheme resp"+scheme.length);
+							var option = '<option value=""></option>';
 							if (scheme != undefined)
 								for (var i = 0; i < scheme.length; i++) {
 
 								option = option + '<option value="' + scheme[i].id + '">' +scheme[i].value +'-'+scheme[i].quantity+ '</option>';
+								alert("222:"+option);
 								}
+							alert("no resp");
 							$('#schemeId').find('option').remove();
 							$('#schemeId').append(option);
 
@@ -726,7 +734,7 @@ window.onbeforeunload = function () {
 					}
 			 }
 			 
-			 if (inputVal[i].attr('id') == 'availabilityId' && $('#availabilityId').val() == 1) {
+			/*  if (inputVal[i].attr('id') == 'availabilityId' && $('#availabilityId').val() == 1) {
 				
 					if ($('#schemeId').val() == "") {
 						$('#schemeId')
@@ -737,7 +745,7 @@ window.onbeforeunload = function () {
 						$('#schemeId').focus();
 						flag = false;
 					}
-			 }
+			 } */
 			
 			
 
@@ -1017,8 +1025,8 @@ window.onbeforeunload = function () {
                                     </c:forEach>
 
                                 </select>
-                                <a href="library/TypeOfCategory.pdf" download><img src="library/img/pdf-image.jpg" width="35px" height="40px" style="position: absolute; cursor: pointer;"></a>
-
+                               <!--  <a href="library/TypeOfCategory.pdf" download><img src="library/img/pdf-image.jpg" width="35px" height="40px" style="position: absolute; cursor: pointer;"></a> -->
+ <a href="library/TypeOfCategory.pdf" target="_blank"><img src="library/img/pdf-image.jpg" width="35px" height="40px" style="position: absolute; cursor: pointer;"></a>
                             </div>
                             <br />
                         </td>
@@ -1043,7 +1051,7 @@ window.onbeforeunload = function () {
                         <div>
                                    <label><b>REQs of water<font style="color: rgb(128, 128, 128); font-size: 10px;"> (in KLD):</font></b></label> <span style="color: red;">*</span>
                                        <input placeholder="Ex: 12345" type="text" id="reqMldId" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeypress="gst()" name="reqMld" style="margin-right: 5px;margin-left: 30px; width: 130px;" maxlength="5" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Requirement of water" />
-                                        <a href="library/MLD.pdf" download><img src="library/img/pdf-image.jpg" width="35px" height="40px" style="position: relative; cursor: pointer;"></a>
+                                       <!--  <a href="library/MLD.pdf" download><img src="library/img/pdf-image.jpg" width="35px" height="40px" style="position: relative; cursor: pointer;"></a> -->
                                 </div>
                             <!-- <div>
                                 <label><b>Type of water:</b></label> <span style="color: red;">*</span>
@@ -1066,7 +1074,8 @@ window.onbeforeunload = function () {
                                     <option value="1">Treated (Chloronated)</option>
                                     <!-- <option value="1">Raw Water</option> -->
                                     <option value="2">Secondary treated water</option>
-                                </select><img src="library/img/pdf-image.jpg" width="35px" height="40px" style="position: absolute; cursor: pointer;">
+                               <!--  </select><img src="library/img/pdf-image.jpg" width="35px" height="40px" style="position: absolute; cursor: pointer;"> -->
+                                </select><a href="library/twawsstariff.pdf" target="_blank"><img src="library/img/pdf-image.jpg" width="35px" height="40px" style="position: absolute; cursor: pointer;">
                             </div>
                         
                                 <%-- <div>
@@ -1095,8 +1104,8 @@ window.onbeforeunload = function () {
                         <td>
                             <div>
                                 <label><b>Scheme:</b></label> 
-                                <select class="classCategory" id="schemeId" name="scheme" style="margin-left: 122px;" title="Scheme with Quantity">
-                                    <option value="">--Select--</option>
+                                <select class="classCategory" id="schemeId" multiple="multiple"  name="scheme" readonly style="margin-left: 122px;" title="Scheme with Quantity">
+                                    <option value=""></option> 
                                    
                                 </select>
                             </div>
