@@ -115,19 +115,19 @@ window.onbeforeunload = function () {
 		
 		
 		
-		 $("#legCompNameId").val("Jay Test");
+		 $("#legCompNameId").val("");
 		$("#correspondenceAddrId").val("");
-		$("#contactPersonNameId").val("Jay");
-		$("#mobileNumId").val("+919677096448");
-		$("#emailAddrId").val("mritunjayku1@gmail.com");
-		$("#categoryTypeId").val("1");
-		$("#reqMldId").val("1234");
+		$("#contactPersonNameId").val("");
+		$("#mobileNumId").val("");
+		$("#emailAddrId").val("");
+		$("#categoryTypeId").val("");
+		$("#reqMldId").val("");
 		$("#workTypeId").val("1");
 		$("#pinCodeId").val("600560");
 		$("#isNewConnectionId").val("1");
-		$("#cpinCodeId").val("879787"); 
-		$('#surveyFieldNoId').val("survey");
-		$('#localBodyId').val("Body");
+		$("#cpinCodeId").val(""); 
+		$('#surveyFieldNoId').val("");
+		$('#localBodyId').val("");
 		 
 		
 		$(document).keydown(function (event) {

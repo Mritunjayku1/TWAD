@@ -33,10 +33,10 @@ public class MasterScheme implements Serializable{
 	@Column(name = "SCHEME_ID", unique = true, nullable = false, precision = 10, scale = 0)
 	private Integer schemeId;
 	
-	@Column(name = "SCHEME_NAME", length = 100)
+	@Column(name = "SCHEME_NAME", length = 1000)
 	private String schemeName;
 	
-	@Column(name = "Quantity", length = 100)
+	@Column(name = "Quantity", length = 500)
 	private String quantity;
 	
 	

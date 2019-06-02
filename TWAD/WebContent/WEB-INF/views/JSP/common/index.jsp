@@ -232,7 +232,7 @@ html,body {
 	<table id="mydiv">
 
 		<tr>
-			<td valign="middle" colspan="2" style="height: 130px; width: 100%;">
+			<td valign="middle" colspan="3" style="height: 130px; width: 100%;">
 				<table width="100%">
 					<tbody>
 						<tr>
@@ -262,18 +262,34 @@ html,body {
 						&nbsp;</div>
 				</div>
 			</td>
-			<td></td>
+			
 		</tr>
 
 		<tr>
-			
+		<td valign="top" align="left" style="width: 30%;">
+		<span style="font-size: 14px; color: Black;" ><p align="justify">
+TWAD Board is vested with the responsibility of providing Water Supply & Sewerage facilities in the entire State of Tamil Nadu, except Chennai Metropolitan area and have implemented various programmes sponsored by the Government of India and Government of Tamil Nadu during the past four decades.</p>
+<p align="justify">
+In addition to the above, many Industries/Institutions are approaching TWAD Board for their water requirement. Though the prime focus of TWAD Board is to cater to the community needs, Industrial needs also have to be taken care off, to pave way for a sustainable development. There is a provision in the TWAD Board Act, to cater to the water supply and sanitation requirement of Industries and Institutions. Such works towards Industries and institutions are taken up by TWAD Board as Deposit works.</p>
 
-<td valign="top" align="center" style="width: 100%;">
-    <div style="width: 460px; margin-top: 80px;height: 350px;">
+<p><b>TWAD ACT</b></p>
+<p align="justify">
+As per TWAD Board Act, (Investigation, Execution and maintenance of Water Supply Scheme and Drainage Scheme) Rules 1973, The Board may on the direction of Government, take up the investigation, preparation, execution and maintenance of any scheme for the provision of water and drainage facilities, to meet the needs of any industries or institutions within the area of the local authority.</p>
+<p align="justify">
+Accordingly, proposals seeking clearance to take up investigation, implementation and maintenance of Water Supply Scheme to certain industries/institutions, as Deposit Works, were placed before the Board then and there for recommending to Government and clearance had been sought for, with the recommendation of Board.</p>
 
-				<ul style="margin-top: 0px !important; list-style-type: none; padding: 0px">
+<p><b>Clearance from Government</b></p>
+<p align="justify">
+The Government, in the last eight months have given clearance to take up Investigation, Implementation and Maintenance of the following Deposit Works, towards Industries/Institutions, for which investigation works have been taken up.</p>
+</span>
+</td>
+			<td valign="top" align="center" style="width: 40%;">
 
-					<li class="dropdown-slide" id="companyLogin" style="background-color: #FED367; width: 100%; border-bottom: 2px solid #fff; border-right: none !important;"><a href="/TwadWeb/formRegister.do" class="dropdown-toggle" data-toggle="dropdown">
+  				<div style="width: 460px; margin-top: 80px;height: 350px;">
+
+					<ul style="margin-top: 0px !important; list-style-type: none; padding: 0px">
+
+						<li class="dropdown-slide" id="companyLogin" style="background-color: #c4e9f2; width: 100%; border-bottom: 2px solid #fff; border-right: none !important;"><a href="/TwadWeb/formRegister.do" class="dropdown-toggle" data-toggle="dropdown">
 							<table style="width: 100%;" id="companyRegistration">
 								<tbody>
 									<tr>
@@ -287,7 +303,7 @@ html,body {
 								</tbody>
 							</table>
 					</a></li>
-					<li class="dropdown-slide" style="background-color: #FED367; width: 100%; border-bottom: 2px solid #fff; border-right: none !important;"><a href="/TwadWeb/adminLogin.do" class="dropdown-toggle" data-toggle="dropdown">
+					<li class="dropdown-slide" style="background-color: #c4e9f2; width: 100%; border-bottom: 2px solid #fff; border-right: none !important;"><a href="/TwadWeb/adminLogin.do" class="dropdown-toggle" data-toggle="dropdown">
 							<table style="width: 100%;" id="departmentLogin">
 								<tbody>
 									<tr>
@@ -300,7 +316,7 @@ html,body {
 								</tbody>
 							</table>
 					</a></li>
-					<li class="dropdown-slide" style="background-color: #FED367; width: 100%; border-bottom: 2px solid #fff; border-right: none !important;"><a href="/TwadWeb/checkApplicationStatus.do?appId=" class="dropdown-toggle" data-toggle="dropdown">
+					<li class="dropdown-slide" style="background-color: #c4e9f2; width: 100%; border-bottom: 2px solid #fff; border-right: none !important;"><a href="/TwadWeb/checkApplicationStatus.do?appId=" class="dropdown-toggle" data-toggle="dropdown">
 							<table style="width: 100%;" id="applicationStatus">
 								<tbody>
 									<tr>
@@ -313,7 +329,7 @@ html,body {
 								</tbody>
 							</table>
 					</a></li>
-					<li class="dropdown-slide" style="background-color: #FED367; width: 100%; border-bottom: 2px solid #fff; border-right: none !important;"><a href="/TwadWeb/onlinePayment.do" class="dropdown-toggle" data-toggle="dropdown">
+					<li class="dropdown-slide" style="background-color: #c4e9f2; width: 100%; border-bottom: 2px solid #fff; border-right: none !important;"><a href="/TwadWeb/onlinePayment.do" class="dropdown-toggle" data-toggle="dropdown">
 							<table style="width: 100%;" id="initialPayment">
 								<tbody>
 									<tr>
@@ -351,12 +367,24 @@ html,body {
 
 				</ul>
     </div>
-
+	
 			</td>
+<td valign="top" align="left" style="width: 30%;">
+<img src="library/img/homeimg.jpg" style="padding-left: 10px; padding-right: 10px;">
+<span style="font-size: 14px; color: Black;"><p align="justify"><p><a href="https://www.twadboard.tn.gov.in" target="_blank">
+TWAD HOME</p></a>
+</span>
+<span style="font-size: 14px; color: Black;"><p align="justify"><p><a href="http://www.twadedb.in/procedure.pdf" target="_blank">
+Click Here For Procedure for New Water</p> <p>
+Supply Projects/Connections for Industrial/Institutions</p></a>
+</span>
 
+</td>
 		</tr>
+		
+		
 		<tr>
-			<td colspan="2"><hr /></td>
+			<td colspan="3"><hr /></td>
 			<td></td>
 		</tr>
 
