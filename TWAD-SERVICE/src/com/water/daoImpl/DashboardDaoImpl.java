@@ -3177,7 +3177,7 @@ public String editScheme(VillageSchemeFormBean districtSchemeFormBean ){
 			            .add(Projections.property("village.districtName"),"villageName")
 			            .add(Projections.property("app.schemeName"),"schemeName")  
 			            .add(Projections.property("app.quantity"),"quantity") 
-			           // .add(Projections.property("village.villageId"),"villageId")  
+			            .add(Projections.property("village.districtId"),"villageId")  
 			            .add(Projections.property("app.schemeId"),"schemeId"))
 			
 		.setResultTransformer(Transformers.aliasToBean(VillageSchemeFormBean.class));
