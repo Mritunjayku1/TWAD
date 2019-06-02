@@ -8,6 +8,7 @@
 <html>
 <head>
        <link href="library/css/style.css" rel="stylesheet" />
+        <link href="library/assets/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
        <link rel="stylesheet" href="library/assets/plugins/bootstrap/css/bootstrap.css" />
         <link href="library/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
 
@@ -95,6 +96,11 @@ div.tabArrow {
 .popover{
         min-width:150px;
     }
+    
+   /*  #schemeId tr:odd{
+    background-color: #f9f9f9;
+    } */
+    
 </style>
 
 
@@ -108,7 +114,7 @@ window.onbeforeunload = function () {
 	$(document).ready(function() {
 		
 		
-		/* 
+		
 		 $("#legCompNameId").val("Jay Test");
 		$("#correspondenceAddrId").val("");
 		$("#contactPersonNameId").val("Jay");
@@ -122,7 +128,7 @@ window.onbeforeunload = function () {
 		$("#cpinCodeId").val("879787"); 
 		$('#surveyFieldNoId').val("survey");
 		$('#localBodyId').val("Body");
-		 */
+		 
 		
 		$(document).keydown(function (event) {
 		    if (event.keyCode == 123) { // Prevent F12
@@ -227,7 +233,6 @@ window.onbeforeunload = function () {
 							url: "library/DistrictTaluk.json",
 							success: function (
 								response) {
-								//alert(JSON.stringify(response));
 								var districtSelectedValue = $(
 										'#districtId option:selected')
 									.val();
@@ -283,21 +288,17 @@ window.onbeforeunload = function () {
 						type: "GET",
 						url: "library/Scheme.json",
 						success: function (response) {
-							alert("11111"+JSON.stringify(response));
 							var villageSelectedValue = $('#districtId option:selected').val();
-							alert("villageSelectedValue:"+villageSelectedValue);
 							
 							var scheme = response[villageSelectedValue];
-							alert("scheme resp"+scheme.length);
-							var option = '<option value=""></option>';
+							var option = '<thead><tr><th width="70%">Scheme Name</th><th>Quantity</th></tr></thead><tbody>';
+							
 							if (scheme != undefined)
 								for (var i = 0; i < scheme.length; i++) {
-
-								option = option + '<option value="' + scheme[i].id + '">' +scheme[i].value +'-'+scheme[i].quantity+ '</option>';
-								alert("222:"+option);
+                                    option = option + '<tr><td>'+scheme[i].value+'</td><td>'+scheme[i].quantity+'</td></tr>';
 								}
-							alert("no resp");
-							$('#schemeId').find('option').remove();
+							option = option +'</tbody>';
+							$('#schemeId').find('tr').remove();
 							$('#schemeId').append(option);
 
 						}
@@ -317,11 +318,13 @@ window.onbeforeunload = function () {
 			
 		});
 		
+		$('#schemeId').hide();
+		
 		$('#availabilityId').change(function(){
 			var waterAvailability = $(this).val();
-			$('#schemeId').removeAttr('disabled');
+			$('#schemeId').show();
 			if(waterAvailability!=1){
-				$('#schemeId').attr('disabled',true);
+				$('#schemeId').hide();
 			}
 		});
 		
@@ -583,8 +586,7 @@ window.onbeforeunload = function () {
 														}
 									});
 
-									//$("#LoadingImage").show();
-									//alert(JSON.stringify(dataString));
+									
 
 									$
 											.ajax({
@@ -655,7 +657,7 @@ window.onbeforeunload = function () {
 		var availability = $("#availabilityId")
 		
 		
-		var inputVal = new Array(legCompName,surveyFieldNoId, cpinCode, contactPersonName,mobileNum, emailAddr, pinCode,localBody);
+		var inputVal = new Array(legCompName,surveyFieldNoId, cpinCode, contactPersonName,mobileNum, emailAddr, pinCode,districtId);
 		if(isSubmitBtnClicked){
 		   inputVal = new Array(categoryType, isNewConnection,reqMld, workType,availability);
 		}
@@ -753,11 +755,19 @@ window.onbeforeunload = function () {
 
 		
 		  
-		if(pinCode.val()!="" && (districtId.val()=="" || talukId.val()=="" || villageId.val()=="" )){
+		/* if(pinCode.val()!="" && (districtId.val()=="" || talukId.val()=="" || villageId.val()=="" )){
 			districtId.parent('div').find('label').after(
 					'<span class="error"> Please select District,Taluk,Village </span>');
 			flag = false;
 		}
+		 */
+		if(localBody.val()=="" && (talukId.val()=="" || villageId.val()=="" )){
+			localBody.parent('div').find('label').after(
+					'<span class="error"> Please select either Taluk and Village or Local Body </span>');
+			flag = false;
+		}
+		
+		
 		return flag;
 	}
 </script>
@@ -943,7 +953,7 @@ window.onbeforeunload = function () {
                             </div>
                              <br />
                             <div>
-                                <label><b>Local Body:</b></label> <span style="color: red;">*</span>
+                                <label><b>Local Body:</b></label>
                                 <br />
                                 <input placeholder="Local Body" type="text" id="localBodyId" name="localBody" data-toggle="popover" data-trigger="focus" data-placement="right" title="Enter Local body" />
                             </div>
@@ -1030,6 +1040,18 @@ window.onbeforeunload = function () {
                             </div>
                             <br />
                         </td>
+                        
+                         
+                        <td valign="top" rowspan="5" align="center">
+                            <div>
+                               <!--  <label><b>Scheme:</b></label>  -->
+                                <table class="classCategory table table-striped table-bordered table-hover dataTable no-footer" id="schemeId"   name="scheme" style="margin: 5px;width: 285px;" title="Scheme with Quantity">
+                                
+                                </table>
+                         
+                            </div>
+                            <br />
+                        </td>
 
                     </tr>
 
@@ -1045,6 +1067,7 @@ window.onbeforeunload = function () {
                             </div>
                             <br />
                         </td>
+                       
 </tr>
  <tr class="tab2">
                         <td>
@@ -1088,7 +1111,7 @@ window.onbeforeunload = function () {
                     </tr>
                      
                        <tr class="tab2">
-                        <td>
+                        <td width="60%">
                             <div>
                                 <label><b>Availability of water:</b></label>
                                 <select class="classCategory" id="availabilityId" name="availability" style="margin-left: 43px;">
@@ -1099,18 +1122,12 @@ window.onbeforeunload = function () {
                             </div>
                             <br />
                         </td>
+                        
+                        
+                        
                         </tr>
                         <tr class="tab2">
-                        <td>
-                            <div>
-                                <label><b>Scheme:</b></label> 
-                                <select class="classCategory" id="schemeId" multiple="multiple"  name="scheme" readonly style="margin-left: 122px;" title="Scheme with Quantity">
-                                    <option value=""></option> 
-                                   
-                                </select>
-                            </div>
-                            <br />
-                        </td>
+                        
                         </tr>
                     
                     

@@ -214,10 +214,11 @@ public class ApplicationService {
 		applicationDtls.setSurveyFieldNo(appFormBean.getSurveyFieldNo());
 		
 		applicationDtls.setDistrict( (MasterDistrict) session.get(MasterDistrict.class, Integer.parseInt(appFormBean.getDistrict())));
+		if(appFormBean.getTaluk() != null && !appFormBean.getTaluk().equals(""))
 		applicationDtls.setTaluk( (MasterTaluk) session.get(MasterTaluk.class, Integer.parseInt(appFormBean.getTaluk())));
+		if(appFormBean.getVillage() != null && !appFormBean.getVillage().equals(""))
 		applicationDtls.setVillage( (MasterVillage) session.get(MasterVillage.class, Integer.parseInt(appFormBean.getVillage())));
-		applicationDtls.setScheme( (MasterScheme) session.get(MasterScheme.class, Integer.parseInt(appFormBean.getScheme()!=null?appFormBean.getScheme():"0")));
-
+		//applicationDtls.setScheme( (MasterScheme) session.get(MasterScheme.class, Integer.parseInt(appFormBean.getScheme()!=null?appFormBean.getScheme():"0")));
 		applicationDtls.setLocalBody(appFormBean.getLocalBody());
 		applicationDtls.setAvailability(appFormBean.getAvailability());
 		

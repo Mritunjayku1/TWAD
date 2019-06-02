@@ -231,7 +231,7 @@ $(function(){
 	     <li><a href="divisionSubDivisionManagement.do">Division/SubDivision </a></li>
 	     <li><a href="paymentType.do">Payment Type</a></li> 
 	      <li><a href="payment.do">Payment</a></li> 
-	       <li><a href="villageSchemeManagement.do">Village/Scheme</a></li> 
+	       <li><a href="villageSchemeManagement.do">District/Scheme</a></li> 
 	   
 
 	</ul>

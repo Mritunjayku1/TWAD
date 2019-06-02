@@ -553,7 +553,7 @@ $('#deleteScheme').click(function(){
 
 <span><b>Select District Name:</b></span><span style="color: red;">*</span>
 <select id="schemeVillageId" name="schemeVillageName" style="margin-left: 15px;">
-<option value="">--Select Village--</option>
+<option value="">--Select District--</option>
 <c:forEach var="var" items="${list.villageMap}">
 <option value="${var.key}">${var.value}</option>
 </c:forEach>
@@ -606,7 +606,7 @@ $('#deleteScheme').click(function(){
 		<h2 class="bg_heading">Edit Scheme</h2>
 		
 				<input type="hidden" id="editSchemeId"/>
-                 <span><b>Village Name:</b></span>
+                 <span><b>District Name:</b></span>
 				<input placeholder="Ex: ABC" type="text" id="editVillageNameId" name="editVillageName" readonly="readonly"  style="margin-left: 60px;"/><br/>
                 <span><b>Enter Scheme Name:</b></span><span style="color: red;">*</span>
 				<input placeholder="Ex: ABC" type="text" id="editSchemeNoId" name="editSchemeNo" style="margin-left: 5px;width:118px;"/><br/>
