@@ -1207,9 +1207,9 @@ window.onbeforeunload = function () {
              <br/>
             <a> Terms and Conditions</a><br/>
             <ul>
-           <li>The payment early will be given priority for consideration.</li>
-           <li>TWAD reserves the right to cancel</li>
-           <li>Preference & Consumenrs will be at the sole discreation of TWAD BD.HO</li>
+           <li>Those who make early payment will be given priority for consideration.</li>
+           <li>TWAD reserves the right to cancel / reject  application or the approval of the connection</li>
+           <li>Prioritization of the consumer will be the sole discretion of the Managing Director/TWAD</li>
           </ul>
             <input type="checkbox" id="checkAgreeId" name="checkAgree"/> <b>I Agree</b>
             

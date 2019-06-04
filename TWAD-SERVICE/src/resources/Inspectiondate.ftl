@@ -12,11 +12,10 @@ You are requested to make it convenient to be present at site during inspection 
 You may contact the Executive Engineer at his mobile No. 9688722977 for clarifications in this regard.
 
 
-The Chief Engineer
-Operation & Maintenance
 TWAD Board
-No.1 Pumping Station Road
-Chindatripet, Chennai-600 002.
+31, Kamarajar Salai, Chepauk
+Chennai-600 005
+
 
 
 

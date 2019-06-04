@@ -7,8 +7,7 @@ Application Rejected
 Look forward to receive your payment at your earliest to proceed further on your application 
 This is for your kind information
 Thanking you,
-The Chief Engineer
-Operation & Maintenance
 TWAD Board
-No.1 Pumping Station Road
-Chindatripet, Chennai-600 002
+31, Kamarajar Salai, Chepauk
+ Chennai-600 005
+

@@ -7,10 +7,6 @@ Await for further communication to you on this subject.
 
 Thanking you,
 
-The Chief Engineer
-Operation & Maintenance
 TWAD Board
-No.1 Pumping Station Road
-Chindatripet, Chennai-600 002.
-
-
+31, Kamarajar Salai, Chepauk
+Chennai-600 005

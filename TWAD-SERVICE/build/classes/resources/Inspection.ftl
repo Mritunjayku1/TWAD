@@ -10,10 +10,9 @@ In this regard, TWAD officials will be inspecting your site on  ${InspectionDate
 
 You may contact the Executive Engineer at his mobile No.  ${MobileNo} for clarifications in this regard.
 Thanking you,
-The Chief Engineer
-Operation & Maintenance
 TWAD Board
-No.1 Pumping Station Road
-Chindatripet, Chennai-600 002.
+31, Kamarajar Salai, Chepauk
+Chennai-600 005
+
 
 
