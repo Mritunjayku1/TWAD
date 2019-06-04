@@ -32,6 +32,8 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -160,6 +162,38 @@ public class ApplicationController {
 			return json;
 
 		}
+		
+		@RequestMapping(value = "/getApplicationFeePaymentAmount", method = RequestMethod.GET)
+		@ResponseBody
+		public String getApplicationFeePaymentAmount(String appId) throws JsonGenerationException, JsonMappingException, IOException {
+
+			List<AppFormBean> list = new  ArrayList<>();
+			
+			RestTemplate restTemplate = new RestTemplate();
+			AppFormBean appFormBean =new AppFormBean();
+			
+			appFormBean.setAppId(appId);
+			appFormBean.setPaymentType(1);
+			
+			
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			@SuppressWarnings("unchecked")
+			HttpEntity<?> entity = new HttpEntity(appFormBean, headers);
+
+			ResponseEntity<AppFormBean> output = restTemplate.exchange(
+					ApplicationService + "getOnlinePaymentAmount", HttpMethod.POST,
+					entity, AppFormBean.class);
+			
+			ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+			String json = ow.writeValueAsString(output.getBody());
+			
+			
+			return json;
+
+		}
+		
+		
 		
 		@RequestMapping(value = "/paymentResponse", method = RequestMethod.POST,headers="Accept=application/json")
 		@ResponseBody
@@ -294,9 +328,14 @@ public class ApplicationController {
 	
 	@RequestMapping(value = "/saveOnlinePaymentsDetails", method = RequestMethod.POST)
 	//@ResponseBody
-	public ModelAndView saveOnlinePaymentsDetails(AppFormBean appFormBean, HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-		
+	public ModelAndView saveOnlinePaymentsDetails(AppFormBean appFormBean, HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
+        
+		if(appFormBean.getPaymentAmount() == null){
+		String appFormBeanTemp =  getApplicationFeePaymentAmount(appFormBean.getAppId());
+		JSONObject jsonObject = new JSONObject(appFormBeanTemp);
+		String applicationFeeAmount = (String) jsonObject.get("totalAmount");
+		appFormBean.setPaymentAmount(applicationFeeAmount);
+		}
 		
 		ResourceBundle rb1 = ResourceBundle.getBundle("resources/constant");
 		String merchantId = rb1.getString("MerchanId");

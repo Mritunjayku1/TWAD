@@ -276,7 +276,7 @@ $(document).ready(function(){
 <tr><td class="tdPadding" width="50%"><b>Payment Type:</b></td><td>
 <select id="paymentTypeId" name="paymentType">
                                     
-                                        <option value="1">Application Fee</option>
+                                       <!--  <option value="1">Application Fee</option> -->
                                     
                                         <option value="2">Upfront Charges</option>
                                     

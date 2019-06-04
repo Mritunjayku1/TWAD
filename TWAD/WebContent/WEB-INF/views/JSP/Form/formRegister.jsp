@@ -105,11 +105,11 @@ div.tabArrow {
 
 
 <script type = "text/javascript" >
-
+/* 
 window.onbeforeunload = function () {
 	  return "Are you sure you want to leave?";
 	};
-
+ */
 
 	$(document).ready(function() {
 		
@@ -569,7 +569,7 @@ window.onbeforeunload = function () {
 							});
 
 							if (isUpload && validateForm()) {
-								if (confirm("Are you sure want to Register ?")) {
+								//if (confirm("Are you sure want to Register ?")) {
 									$('#loading_image').show();
 									var dataString = $('#formId').serialize();
 									var form = $('#formId')[0];
@@ -610,23 +610,26 @@ window.onbeforeunload = function () {
 
 																	success : function(data) {
 																		$("#LoadingImage").hide();
-																		$('#ackApplicationRef').val(response);
-																		$('#ackCompanyName').val($('#legCompNameId').val());
+																		$('#appId').val(response);
+																		/* $('#ackCompanyName').val($('#legCompNameId').val());
 																		$('#ackApplicantName').val($('#salutationId').val()+ " "+ $('#contactPersonNameId').val());
-																		$('#ackHiddenForm').submit();
+																		$('#ackHiddenForm').submit(); */
+																		$('#onlineFormId').submit();
+																		
 																	},
 																});
 													} else {
 														$("#LoadingImage").hide();
-														$('#ackApplicationRef').val(response);
-														$('#ackCompanyName').val($('#legCompNameId').val());
+														$('#appId').val(response);
+														/* $('#ackCompanyName').val($('#legCompNameId').val());
 														$('#ackApplicantName').val($('#salutationId').val()+ " "+ $('#contactPersonNameId').val());
-														$('#ackHiddenForm').submit();
+														$('#ackHiddenForm').submit(); */
+														$('#onlineFormId').submit();
 													}
 
 												}
 											});
-								}
+								//}
 							}
 						});
 
@@ -1236,6 +1239,12 @@ window.onbeforeunload = function () {
     <input type="hidden" id="ackApplicationRef" name="applicationRef" value="" />
     <input type="hidden" id="ackCompanyName" name="companyName" value="" />
     <input type="hidden" id="ackApplicantName" name="applicantName" value="" />
+
+</form>
+
+<form style="display: hidden" id="onlineFormId" action="saveOnlinePaymentsDetails.do"  method="POST">
+    <input type="hidden"  id="appId" name="appId" value="" />
+     <input type="hidden"  id="paymentTypeId" name="paymentType" value="1" />
 
 </form>
 
