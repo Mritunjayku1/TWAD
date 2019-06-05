@@ -1419,12 +1419,15 @@ public class DashboardDaoImpl implements DashboardDao {
 		try {
 			
 
-			Criteria cr = session.createCriteria(CompanyDtl.class,"companyDtl")
+			Criteria cr = session.createCriteria(CompanyPaymentDtl.class,"companyPaymentDtl")
+					.createAlias("companyPaymentDtl.paymentType", "masterPaymentType")
+					.createAlias("companyPaymentDtl.appId", "companyDtl")
 					.createAlias("companyDtl.categoryType", "categoryType")
 					.createAlias("companyDtl.district", "district")
 					.createAlias("companyDtl.taluk", "taluk" ,JoinType.LEFT.ordinal())
 					.createAlias("companyDtl.village", "village" ,JoinType.LEFT.ordinal())
 					.createAlias("companyDtl.division","division",JoinType.LEFT.ordinal())
+					
 					.setProjection(Projections.projectionList()
 					.add(Projections.property("companyDtl.appId"),"appId")
 					.add(Projections.property("companyDtl.contactPersonName"),"contactPersonName")
@@ -1460,6 +1463,8 @@ public class DashboardDaoImpl implements DashboardDao {
 					.add(Projections.property("companyDtl.localBody"),"localBody")
 				           
 				           )
+					.add(Restrictions.isNotNull("companyPaymentDtl.paymentAmount"))
+					.add(Restrictions.eq("masterPaymentType.paymentTypeId",1))
 					.add(Restrictions.isNull("companyDtl.division"));
 					cr.setResultTransformer(Transformers.aliasToBean(DDPaymentFormBean.class));
 					

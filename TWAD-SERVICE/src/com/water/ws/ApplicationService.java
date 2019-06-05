@@ -371,7 +371,7 @@ catch(Exception e){
 		}*/
 		/*if(appFormBean.getStatusFlag()=='P')
 		{*/
-			applicationDtls.setTotalAmount(appFormBean.getInitialPayment());
+			//applicationDtls.setTotalAmount(appFormBean.getInitialPayment());
 			applicationDtls.setInsStatusId(4);
 			smstemp.setSmsId(5);
 			applicationDtls.setSmsId(smstemp);

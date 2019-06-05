@@ -2576,7 +2576,9 @@ ddPaymentFormBean.setPlotNo(app.getPlotNo());
 ddPaymentFormBean.setStreetName(app.getStreetName());
 ddPaymentFormBean.setLocation(app.getLocation());
 ddPaymentFormBean.setDistrict(app.getDistrict().getDistrictName());
+if(null != app.getTaluk())
 ddPaymentFormBean.setTaluk(app.getTaluk().getTalukName());
+if(null != app.getVillage())
 ddPaymentFormBean.setVillage(app.getVillage().getVillageName());
 ddPaymentFormBean.setPincode(app.getPinCode());
 ddPaymentFormBean.setSurveyFieldNo(app.getSurveyFieldNo());
@@ -2667,7 +2669,9 @@ ddPaymentFormBean.setPlotNo(app.getPlotNo());
 ddPaymentFormBean.setStreetName(app.getStreetName());
 ddPaymentFormBean.setLocation(app.getLocation());
 ddPaymentFormBean.setDistrict(app.getDistrict().getDistrictName());
+if(null != app.getTaluk())
 ddPaymentFormBean.setTaluk(app.getTaluk().getTalukName());
+if(null != app.getVillage())
 ddPaymentFormBean.setVillage(app.getVillage().getVillageName());
 ddPaymentFormBean.setPincode(app.getPinCode());
 ddPaymentFormBean.setSurveyFieldNo(app.getSurveyFieldNo());
@@ -2757,7 +2761,9 @@ ddPaymentFormBean.setPlotNo(app.getPlotNo());
 ddPaymentFormBean.setStreetName(app.getStreetName());
 ddPaymentFormBean.setLocation(app.getLocation());
 ddPaymentFormBean.setDistrict(app.getDistrict().getDistrictName());
+if(null != app.getTaluk())
 ddPaymentFormBean.setTaluk(app.getTaluk().getTalukName());
+if(null != app.getVillage())
 ddPaymentFormBean.setVillage(app.getVillage().getVillageName());
 ddPaymentFormBean.setPincode(app.getPinCode());
 ddPaymentFormBean.setSurveyFieldNo(app.getSurveyFieldNo());
